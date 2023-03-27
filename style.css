@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+/* hide elements and dont damage data */
+.hidden {
+  display: none;
+}
+
 :root {
   --blue: hsl(200, 100%, 10%);
   --white: rgb(255, 255, 255);
@@ -26,17 +31,26 @@ body {
   padding: 2.5rem;
   /* background: linear-gradient(180deg, rgb(91, 208, 255),rgb(0, 134, 243) 80%,rgb(0, 93, 243) 100%); */
   background: linear-gradient(217deg, rgba(0, 242, 255, 0.4), rgba(0, 134, 243,0.5) 70.71%),
-  linear-gradient(137deg, rgba(0, 255, 136, 0.8), rgba(0, 134, 243,0.5) 70.71%),            
+  /* linear-gradient(137deg, rgba(0, 255, 136, 0.8), rgba(0, 134, 243,0.5) 70.71%),      original  */
+  linear-gradient(137deg, rgba(0, 225, 255, 0.8), rgba(0, 134, 243,0.5) 70.71%),            
   linear-gradient(366deg, rgba(0,0,255,.8), rgb(0, 134, 243) 90.71%);
   border-radius: 60px;
   height: max-content;
   box-shadow: 0px 30px 30px rgb(0, 134, 243, 0.3) ;
+  /* border: 2px solid rgb(0, 134, 243); */
+  border: 2px solid rgb(0, 162, 243);
 }
 
 .current-location {
   display: grid;
   justify-content: center;
   padding-bottom: 5%;
+}
+
+.location-name {
+  border: 1px solid rgb(255, 255, 255, 0.5);
+  border-radius: 30px;
+  padding: 5px 15px 5px 15px; 
 }
 
 .map-div {
@@ -48,6 +62,7 @@ body {
   /* background-color: white; */
   border-radius: 20px;
   color: black;
+  padding-top: 10%;
   padding-bottom: 5%;
 }
 
@@ -55,23 +70,29 @@ body {
   width: 100%;
   padding-top: -10px;
   /* height: 100%; */
-  border-radius: 60px;
+  border-radius: 30px;
   box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
 }
 
 .header-top {
-  display: flex;
+  display: grid;
   width: 100%;
   align-items: center;
   justify-content: center;
   /* background-color: red; */
-  padding: 5%;
+  padding: 20%;
 }
 
+
+/*   display: none; voor weather icon om volledig te verbergen op elke */
+
+/* eerst nieuwe mooie weather icons downloaden en in map zetten daarna pas aanzetten. */
+/* als het teveel afleid weg laten, focu is windrichting */
 .weather-icon {
   width: 60px;
   height: 60px;
   object-fit: contain;
+  /* display: none; */
 }
 
 .weather-icon.large {
@@ -94,8 +115,19 @@ body {
   width: 100%;
   justify-content: space-around;
   gap: 1rem;
-  grid-template-columns: repeat(2, auto);
-  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(3, auto);
+  /* grid-template-rows: repeat(3, auto); */
+  padding-bottom: 10%;
+  border-top: 1px solid rgb(0, 162, 243, 0.5);
+  padding-top: 5%;
+}
+
+
+/* bezig met het center alignenen van dezezon */
+.lowest-header {
+  display: grid;
+  width: 100%;
+  justify-content: center;
 }
 
 .info-grounp {
@@ -129,13 +161,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 3px solid var(--white);
+  /* border: 3px solid var(--white); */
   border-radius: 20px;
   padding: 1rem;
 }
 
 .day-card-day {
   margin-top: 1rem;
+}
+
+/* add background specificly for current day */
+
+/* first make it available as a class, and put that class, on the selected day, change interface also to that days data */
+/* staat nu tijdelijk op huidige dag */
+.day-card-background {
+  background-color: tomato;
 }
 
 .hour-section {
@@ -155,5 +195,8 @@ body {
 .hour-row > td {
   padding: 0.25rem;
 }
+
+
+
 
 
