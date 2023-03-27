@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wind App</title>
+</head>
+
+<body class="blurred">
+  <!-- blurred within body : class="blurred" for loading without info later -->
+
+  <header class="header">
+    <div class="current-location"><span class="label">⟟ IJmuiden</span></div>
+    <div class="map-div">
+      <div class="map-with-location">
+        <img src="images/temp-map.png" id="temp-map-img">
+      </div>
+    </div>
+    <div class="header-top">
+      <div class="header-current-temp">
+        <span data-current-wind>30</span>&deg;<span>↑</span>
+      </div>
+    </div>
+    <div class="header-bottom">
+      <div class="info-group">
+        <div class="label">High</div>
+        <div><span data-current-high="">32</span>&deg;C</div>
+      </div>
+      <div class="info-group">
+        <div class="label">Low</div>
+        <div><span data-current-low="">32</span>&deg;C</div>
+      </div>
+      <div class="info-group">
+        <div class="label">Temp</div>
+        <img class="weather-icon large" src="icons/sun.svg" data-current-icon>
+        <div><span data-current-temp="">9</span><span class="value-sub-info">&deg;</span></div>
+      </div>
+      <div class="info-group">
+        <div class="label">precip</div>
+        <div><span data-current-precip="">0.1</span><span class="value-sub-info">mm</span></div>
+      </div>
+    </div>
+
+  </header>
+
+  <section class="day-section" data-day-section>
+    <div class="day-card">
+      <img src="icons/cloud.svg" class="weather-icon" alt="">
+      <div class="day-card-day">Monday </div>
+      <div>32&deg;</div>
+    </div>
+    <div class="day-card">
+      <img src="icons/cloud.svg" class="weather-icon" alt="">
+      <div class="day-card-day">Tuesday </div>
+      <div>32&deg;</div>
+    </div>
+    <div class="day-card">
+      <img src="icons/cloud.svg" class="weather-icon" alt="">
+      <div class="day-card-day">Wednesday </div>
+      <div>32&deg;</div>
+    </div>
+    <div class="day-card">
+      <img src="icons/cloud.svg" class="weather-icon" alt="">
+      <div class="day-card-day">Thursday </div>
+      <div>32&deg;</div>
+    </div>
+    <div class="day-card">
+      <img src="icons/cloud.svg" class="weather-icon" alt="">
+      <div class="day-card-day">Friday </div>
+      <div>32&deg;</div>
+    </div>
+    <div class="day-card">
+      <img src="icons/cloud.svg" class="weather-icon" alt="">
+      <div class="day-card-day">Saturday </div>
+      <div>32&deg;</div>
+    </div>
+    <div class="day-card">
+      <img src="icons/cloud.svg" class="weather-icon" alt="">
+      <div class="day-card-day">Sunday </div>
+      <div>32&deg;</div>
+    </div>
+  </section>
+
+  <table class="hour-section">
+    <tbody data-hour-section>
+      <tr class="hour-row">
+        <td>
+          <div class="info-group">
+            <div class="label">Monday</div>
+            <div>15:00</div>
+          </div>
+        </td>
+        <td>
+          <img src="icons/cloud.svg" class="weather-icon">
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Temp</div>
+            <div>31&deg;</div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Wind</div>
+            <div>8k<span class="value-sub-info">km/h</span></div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Precip</div>
+            <div>0.2<span class="value-sub-info">mm</span></div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hour-row">
+        <td>
+          <div class="info-group">
+            <div class="label">Monday</div>
+            <div>15:00</div>
+          </div>
+        </td>
+        <td>
+          <img src="icons/cloud.svg" class="weather-icon">
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Temp</div>
+            <div>31&deg;</div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Wind</div>
+            <div>8k<span class="value-sub-info">km/h</span></div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Precip</div>
+            <div>0.2<span class="value-sub-info">mm</span></div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hour-row">
+        <td>
+          <div class="info-group">
+            <div class="label">Monday</div>
+            <div>15:00</div>
+          </div>
+        </td>
+        <td>
+          <img src="icons/cloud.svg" class="weather-icon">
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Temp</div>
+            <div>31&deg;</div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Wind</div>
+            <div>8k<span class="value-sub-info">km/h</span></div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Precip</div>
+            <div>0.2<span class="value-sub-info">mm</span></div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hour-row">
+        <td>
+          <div class="info-group">
+            <div class="label">Monday</div>
+            <div>15:00</div>
+          </div>
+        </td>
+        <td>
+          <img src="icons/cloud.svg" class="weather-icon">
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Temp</div>
+            <div>31&deg;</div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Wind</div>
+            <div>8k<span class="value-sub-info">km/h</span></div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Precip</div>
+            <div>0.2<span class="value-sub-info">mm</span></div>
+          </div>
+        </td>
+      </tr>
+      <tr class="hour-row">
+        <td>
+          <div class="info-group">
+            <div class="label">Monday</div>
+            <div>15:00</div>
+          </div>
+        </td>
+        <td>
+          <img src="icons/cloud.svg" class="weather-icon">
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Temp</div>
+            <div>31&deg;</div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Wind</div>
+            <div>8k<span class="value-sub-info">km/h</span></div>
+          </div>
+        </td>
+        <td>
+          <div class="info-group">
+            <div class="label">Precip</div>
+            <div>0.2<span class="value-sub-info">mm</span></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <template id="day-card-template">
+    <div class="day-card">
+      <img data-icon class="weather-icon" alt="">
+      <div class="day-card-day" data-date> </div>
+      <div><span data-temp></span><span>&deg;C</span></div>
+    </div>
+  </template>
+
+  <template id="hour-row-template">
+    <tr class="hour-row">
+      <td>
+        <div class="info-group">
+          <div class="label" data-day></div>
+          <div data-time></div>
+        </div>
+      </td>
+      <td>
+        <img data-icon class="weather-icon">
+      </td>
+      <td>
+        <div class="info-group">
+          <div class="label">Temp</div>
+          <div><span data-temp></span><span>&deg;C</span></div>
+        </div>
+      </td>
+      <td>
+        <div class="info-group">
+          <div class="label">Wind</div>
+          <div><span data-wind=""></span><span class="value-sub-info">&deg;</span></div>
+        </div>
+      </td>
+      <td>
+        <div class="info-group">
+          <div class="label">Precip</div>
+          <div><span data-precip></span><span class="value-sub-info">mm</span></div>
+        </div>
+      </td>
+    </tr>
+  </template>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
+
+
+
+
+<!-- to acces http://localhost:5173/ -->a
