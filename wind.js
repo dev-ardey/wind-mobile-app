@@ -18,10 +18,35 @@ export function getWeather(lat, lon, timezone) {
             return {
                 current: parseCurrentWeather(data),
                 daily: parseDailyWeather(data),
-                hourly: parseHourlyWeather(data)
+                hourly: parseHourlyWeather(data),
+                // parseArrowWeather is new and gives data to parseArrowWeather
+                arrow: parseArrowWeather(data),
             }
         })
 }
+
+// parseArrowWeather function is new
+
+function parseArrowWeather({ daily }) {
+    const {
+        winddirection_10m_dominant: [arrowDirection],
+    } = daily
+    // console.log(arrowDirection)
+
+    function arrowRotate(selector) {
+        var elems = document.querySelectorAll(selector);
+        if (elems.length == 0) return;
+        elems.forEach(function (el) {
+            // arrowDirection + 180 is omdat image op de kop is
+            el.style.transform = "rotate(" + (arrowDirection + 180) + "deg)"
+        })
+    }
+    arrowRotate('.green-arrow')
+    return {
+        windDirection: Math.round(arrowDirection),
+    }
+}
+
 
 
 function parseCurrentWeather({ current_weather, daily }) {
@@ -45,6 +70,7 @@ function parseCurrentWeather({ current_weather, daily }) {
         // windDirection_10m ?
         winddirection_10m_dominant: [windDirection],
     } = daily
+    // console.log(windDirection)
 
     return {
         // things that we get from the API

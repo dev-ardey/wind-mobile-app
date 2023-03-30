@@ -53,6 +53,15 @@ body {
   padding: 5px 15px 5px 15px; 
 }
 
+.header-icon {
+  display: grid;
+  justify-content: center;
+  justify-self: center;
+  /* background-color: tomato; */
+  margin-top: 20%;
+  margin-bottom: -30%;
+}
+
 .map-div {
   display: grid;
   justify-content: center;
@@ -80,7 +89,7 @@ body {
   align-items: center;
   justify-content: center;
   /* background-color: red; */
-  padding: 20%;
+  padding: 15%;
 }
 
 .green-arrow {
@@ -88,9 +97,9 @@ body {
   justify-content: center;
   align-self: center;
   width: 100%;
-  height: 60%;
+  height: 70%;
   margin-bottom: -20%;
-  margin-top: -20%;
+  margin-top: -30%;
 }
 
 

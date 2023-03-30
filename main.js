@@ -3,7 +3,7 @@
 // import css style file
 import "./style.css";
 import { getWeather } from "./wind";
-import { ICON_MAP } from "./iconMap"
+import { ICON_MAP } from "./iconMap";
 
 // link to current location
 navigator.geolocation.getCurrentPosition(positionSucces, positionError)
@@ -87,9 +87,4 @@ function renderHourlyWeather(hourly) {
     hourlySection.append(element)
   })
 }
-
-
-
-
-
 
