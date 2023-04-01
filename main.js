@@ -49,6 +49,14 @@ function renderCurrentWeather(current) {
   setValue("current-precip", current.precip)
 }
 
+function arrowRotate(elems, windDirection) {
+  if (elems.length == 0) return;
+  elems.forEach(function (el) {
+    // windDirection + 180 is omdat image op de kop is
+    el.style.transform = "rotate(" + (windDirection + 180) + "deg)"
+  })
+}
+
 //run a formatter that will run just the day portion of the weekday
 // short / long is the language quat spells out the day depending on the language of the user
 const DAY_FORMATTER = Intl.DateTimeFormat(undefined, { weekday: "short" })
@@ -56,7 +64,7 @@ const dailySection = document.querySelector("[data-day-section]")
 const dayCardTemplate = document.getElementById("day-card-template")
 function renderDailyWeather(daily) {
   dailySection.innerHTML = ""
-  daily.forEach(day => {
+  daily.forEach((day, index) => {
     // clone a template
     const element = dayCardTemplate.content.cloneNode(true)
     // set data temp within the just created clone
@@ -66,6 +74,8 @@ function renderDailyWeather(daily) {
     // get actual icon
     element.querySelector("[data-icon]").src = getIconUrl(day.iconCode)
     dailySection.append(element)
+    arrowRotate([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection)
+
   })
 }
 
@@ -75,7 +85,7 @@ const hourRowTemplate = document.getElementById("hour-row-template")
 function renderHourlyWeather(hourly) {
   //take hourlySection and remove given html
   hourlySection.innerHTML = ""
-  hourly.forEach(hour => {
+  hourly.forEach((hour, index) => {
     const element = hourRowTemplate.content.cloneNode(true)
     setValue("temp", hour.temp, { parent: element })
     // ik denk windDirection, check of werkt
@@ -85,6 +95,9 @@ function renderHourlyWeather(hourly) {
     setValue("time", HOUR_FORMATTER.format(hour.timestamp), { parent: element })
     element.querySelector("[data-icon]").src = getIconUrl(hour.iconCode)
     hourlySection.append(element)
+    arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
+
   })
 }
+
 

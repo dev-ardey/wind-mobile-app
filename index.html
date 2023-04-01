@@ -11,19 +11,19 @@
   <!-- blurred within body : class="blurred" for loading without info later -->
 
   <header class="header">
-    <div class="current-location"><span class="label, location-name">⟟ IJmuiden</span>  
-       <img class="weather-icon large, icon-header, header-icon" src="icons/sun.png" data-current-icon>
+    <div class="current-location"><span class="label, location-name">⟟ IJmuiden</span>
+      <img class="weather-icon large, icon-header, header-icon" src="icons/sun.png" data-current-icon>
+    </div>
+    <div class="map-div">
+      <div class="map-with-location">
+        <img src="images/temp-map-1.png" id="temp-map-img">
       </div>
-      <div class="map-div">
-        <div class="map-with-location">
-          <img src="images/temp-map-1.png" id="temp-map-img">
-        </div>
-      </div>
+    </div>
     <div class="header-top">
       <div class="header-current-wind">
         <span data-current-wind>30</span>&deg;
       </div>
-      <img src="images/green-arrow.svg" alt="↑" class="green-arrow">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-current">
     </div>
     <div class="header-bottom">
       <div class="info-group">
@@ -50,37 +50,44 @@
 
   <section class="day-section" data-day-section>
     <div class="day-card">
-      <img src="icons/cloud.png" class="weather-icon" alt="">
+      <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-day">
       <div class="day-card-day">Monday </div>
       <div>32&deg;</div>
     </div>
     <div class="day-card">
-      <img src="icons/cloud.png" class="weather-icon" alt="">
+      <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-day">
       <div class="day-card-day">Tuesday </div>
       <div>32&deg;</div>
     </div>
     <div class="day-card">
-      <img src="icons/cloud.png" class="weather-icon" alt="">
+      <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-day">
       <div class="day-card-day">Wednesday </div>
       <div>32&deg;</div>
     </div>
     <div class="day-card">
-      <img src="icons/cloud.png" class="weather-icon" alt="">
+      <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-day">
       <div class="day-card-day">Thursday </div>
       <div>32&deg;</div>
     </div>
     <div class="day-card">
-      <img src="icons/cloud.png" class="weather-icon" alt="">
+      <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-day">
       <div class="day-card-day">Friday </div>
       <div>32&deg;</div>
     </div>
     <div class="day-card">
-      <img src="icons/cloud.png" class="weather-icon" alt="">
+      <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-day">
       <div class="day-card-day">Saturday </div>
       <div>32&deg;</div>
     </div>
     <div class="day-card">
-      <img src="icons/cloud.png" class="weather-icon" alt="">
+      <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-day">
       <div class="day-card-day">Sunday </div>
       <div>32&deg;</div>
     </div>
@@ -238,7 +245,8 @@
 
   <template id="day-card-template">
     <div class="day-card">
-      <img data-icon class="weather-icon" alt="">
+      <img data-icon class="weather-icon, hidden" alt="">
+      <img src="images/green-arrow.svg" alt="↑" class="green-arrow-day">
       <!-- deze aanpassen van weather icon data toevoegen wind direction daily -->
       <div class="day-card-day" data-date> </div>
       <div><span data-temp></span><span>&deg;C</span></div>
@@ -265,6 +273,7 @@
       <td>
         <div class="info-group">
           <div class="label">Wind</div>
+          <img src="images/green-arrow.svg" alt="↑" class="green-arrow-hour">
           <div><span data-wind=""></span><span class="value-sub-info">&deg;</span></div>
         </div>
       </td>

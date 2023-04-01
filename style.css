@@ -89,10 +89,10 @@ body {
   align-items: center;
   justify-content: center;
   /* background-color: red; */
-  padding: 15%;
+  padding: 5% 15% 5% 15%;
 }
 
-.green-arrow {
+.green-arrow-current {
   display:grid;
   justify-content: center;
   align-self: center;
@@ -127,6 +127,7 @@ body {
     font-size: 5rem;
     color: var(--white);
     text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+    margin-bottom: -10px;
 }
 
 .header-bottom {
@@ -190,6 +191,11 @@ body {
   margin-top: 1rem;
 }
 
+.green-arrow-day {
+  width: 60px;
+  height: 60px;
+}
+
 /* add background specificly for current day */
 
 /* first make it available as a class, and put that class, on the selected day, change interface also to that days data */
@@ -202,6 +208,11 @@ body {
   width:100%;
   text-align: center;
   border-spacing: 0;
+}
+
+.green-arrow-hour {
+  width: 60px;
+  height: 60px;
 }
 
 .hour-row {

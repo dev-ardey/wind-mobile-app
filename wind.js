@@ -21,31 +21,85 @@ export function getWeather(lat, lon, timezone) {
                 hourly: parseHourlyWeather(data),
                 // parseArrowWeather is new and gives data to parseArrowWeather
                 arrow: parseArrowWeather(data),
+                // arrowHour: parseArrowHourWeather(data),
             }
         })
 }
 
 // parseArrowWeather function is new
 
-function parseArrowWeather({ daily }) {
+// function parseArrowWeather({ hourly }) {
+//     const {
+//         winddirection_10m: [arrowDirection],
+//     } = hourly
+//     // console.log(arrowDirection)
+
+//     function arrowRotate(selector) {
+//         var elems = document.querySelectorAll(selector);
+//         if (elems.length == 0) return;
+//         elems.forEach(function (el) {
+//             // arrowDirection + 180 is omdat image op de kop is
+//             el.style.transform = "rotate(" + (arrowDirection + 180) + "deg)"
+//         })
+//     }
+//     arrowRotate('.green-arrow-current')
+//     return {
+//         arrowDirection: Math.round(arrowDirection),
+//     }
+// }
+
+
+// function parseArrowHourWeather({ hourly }) {
+//     const {
+//         winddirection_10m: [arrowDirection],
+//     } = hourly
+//     // console.log(arrowDirectionHour)
+
+//     function arrowRotate(selector) {
+//         var elems = document.querySelectorAll(selector);
+//         if (elems.length == 0) return;
+//         elems.forEach(function (el) {
+//             // arrowDirection + 180 is omdat image op de kop is
+//             el.style.transform = "rotate(" + (arrowDirection + 180) + "deg)"
+//         })
+//     }
+//     arrowRotate('.green-arrow-current')
+//     return {
+//         arrowDirection: Math.round(arrowDirection),
+//     }
+// }
+
+
+
+
+
+
+
+// test, alleen element toe gevoegt aan function
+
+
+function arrowRotate(elems, arrowDirection) {
+    if (elems.length == 0) return;
+    elems.forEach(function (el) {
+        // arrowDirection + 180 is omdat image op de kop is
+        el.style.transform = "rotate(" + (arrowDirection + 180) + "deg)"
+    })
+}
+
+function parseArrowWeather({ hourly }) {
     const {
-        winddirection_10m_dominant: [arrowDirection],
-    } = daily
+        winddirection_10m: [arrowDirection],
+    } = hourly
     // console.log(arrowDirection)
 
-    function arrowRotate(selector) {
-        var elems = document.querySelectorAll(selector);
-        if (elems.length == 0) return;
-        elems.forEach(function (el) {
-            // arrowDirection + 180 is omdat image op de kop is
-            el.style.transform = "rotate(" + (arrowDirection + 180) + "deg)"
-        })
-    }
-    arrowRotate('.green-arrow')
+    arrowRotate(document.querySelectorAll('.green-arrow-current'), arrowDirection)
     return {
-        windDirection: Math.round(arrowDirection),
+        arrowDirection: Math.round(arrowDirection),
     }
 }
+//
+
+
 
 
 
@@ -100,6 +154,7 @@ function parseDailyWeather({ daily }) {
             // index of the weather value at the current index, day one = 1 ,day two = 2 etc.
             iconCode: daily.weathercode[index],
             maxTemp: Math.round(daily.temperature_2m_max[index]),
+            windDirection: daily.winddirection_10m_dominant[index]
 
         }
     })
@@ -109,11 +164,11 @@ function parseDailyWeather({ daily }) {
 function parseHourlyWeather({ hourly, current_weather }) {
     return hourly.time
         .map((time, index) => {
+            // console.log(hourly.winddirection_10m[index])
             return {
                 timestamp: time * 1000,
                 iconCode: hourly.weathercode[index],
                 temp: Math.round(hourly.temperature_2m[index]),
-                // maby hourly.windDirection_10m[index]
                 windDirection: Math.round(hourly.winddirection_10m[index]),
                 precip: Math.round(hourly.precipitation[index] * 100) / 100,
             }
