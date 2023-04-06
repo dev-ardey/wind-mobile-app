@@ -4,7 +4,6 @@
 import "./style.css";
 import { getWeather } from "./wind";
 import { ICON_MAP } from "./iconMap";
-
 // link to current location
 navigator.geolocation.getCurrentPosition(positionSucces, positionError)
 
@@ -74,7 +73,7 @@ function renderDailyWeather(daily) {
     // get actual icon
     element.querySelector("[data-icon]").src = getIconUrl(day.iconCode)
     dailySection.append(element)
-    arrowRotate([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection)
+    arrowRotate([document.querySelectorAll('.green-arrow-day')[index]], (day.windDirection))
 
   })
 }
@@ -100,4 +99,79 @@ function renderHourlyWeather(hourly) {
   })
 }
 
+// current wind-direction colour
+// air-api
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+    
+    // Calculate the bearing between the current location and A
+    var bearing = calculateBearing(lat, lon, 52.4831765, 4.5729285);
+    
+    // Calculate the opposite direction of the bearing to get the direction from A to the current location
+    var fromADeg = (bearing + 180) % 360;
+    
+    // Get wind direction data from an API
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${52.4831765}&lon=${4.5729285}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
+      .then(response => response.json())
+      .then(data => {
+        var windDeg = data.wind.deg;
+        
+        // Check if wind is blowing from A towards the current location
+        if (windBlowingFrom(windDeg, fromADeg)) {
+          // doX();
+           // call function to do X
+          document.getElementById("wind-direction").style.backgroundColor = "green";
+        } else {
+          document.getElementById("wind-direction").style.backgroundColor = "red";
+        }
+      });
+  });
+}
 
+function calculateBearing(lat1, lon1, lat2, lon2) {
+  // Convert coordinates to radians
+  var lat1Rad = deg2rad(lat1);
+  var lon1Rad = deg2rad(lon1);
+  var lat2Rad = deg2rad(lat2);
+  var lon2Rad = deg2rad(lon2);
+  
+  // Calculate bearing using the Haversine formula
+  var y = Math.sin(lon2Rad-lon1Rad) * Math.cos(lat2Rad);
+  var x = Math.cos(lat1Rad)*Math.sin(lat2Rad) - Math.sin(lat1Rad)*Math.cos(lat2Rad)*Math.cos(lon2Rad-lon1Rad);
+  var bearingRad = Math.atan2(y, x);
+  
+  // Convert bearing to degrees
+  var bearing = rad2deg(bearingRad);
+  
+  return bearing;
+}
+
+function deg2rad(degrees) {
+  return degrees * (Math.PI/180);
+}
+
+function rad2deg(radians) {
+  return radians * (180/Math.PI);
+}
+
+function windBlowingFrom(windDeg, fromADeg) {
+  // Calculate the difference between the wind direction and the direction from A to the current location
+  var diff = windDeg - fromADeg;
+  
+  // Adjust for negative angles
+  if (diff < -180) {
+    diff += 360;
+  } else if (diff > 180) {
+    diff -= 360;
+  }
+  
+  // Check if the difference is between -90 and 90 degrees
+  return (diff >= -90 && diff <= 90);
+}
+
+// function to do somthing with the input like change html class
+// function doX() {
+//   // Code to do X
+// }
