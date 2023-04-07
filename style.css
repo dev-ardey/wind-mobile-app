@@ -100,7 +100,9 @@ body {
   height: 70%;
   margin-bottom: -20%;
   margin-top: -30%;
+  /* button colors for js */
   /* background: linear-gradient(rgb(252, 74, 127),rgb(255, 112, 119)); */
+  /* background: linear-gradient(rgb(0, 255, 21), rgb(39, 255, 208)); */
 }
 
 /* .air-api {
@@ -114,7 +116,6 @@ body {
   width: 100%;
   height: 100%;
   display: grid;
-  margin-bottom: 10px;
   padding: 20px;
   border-radius: 20px;
   text-align: center;
@@ -126,6 +127,8 @@ body {
   font-size: 1.2rem;
   color: var(--white);
   text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+  margin-bottom: 5%;
+  box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
 }
 /*   display: none; voor weather icon om volledig te verbergen op elke */
 

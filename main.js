@@ -282,9 +282,9 @@ if ("geolocation" in navigator) {
 
         // Check if wind is blowing from A towards the current location
         if (windBlowingFrom(windDeg, fromADeg)) {
-          // doX();
+          // doX();linear-gradient
           // call function to do X
-          document.getElementById("wind-direction").style.backgroundColor = "green";
+          document.getElementById("wind-direction").style.background = "linear-gradient( rgb(39, 255, 208), rgb(0, 255, 21))";
           document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
         } else {
           document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";

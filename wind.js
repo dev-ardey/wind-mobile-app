@@ -109,7 +109,7 @@ function parseCurrentWeather({ current_weather, daily }) {
     const {
         temperature: currentTemp,
         // current wind is geplaatst door tutorial, maar ik heb hem devined inde daily const
-        // windDirection: currentWind,
+        // windDirection: windDirection,
         //change it back to windDirection because daily and hour are not current
         weathercode: iconCode,
     } = current_weather
