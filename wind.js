@@ -76,25 +76,29 @@ export function getWeather(lat, lon, timezone) {
 
 
 // test, alleen element toe gevoegt aan function
+// alles in de functie veranderd naar windDirection ipv arrowDirection
 
 
-function arrowRotate(elems, arrowDirection) {
+function arrowRotate(elems, windDirection) {
     if (elems.length == 0) return;
     elems.forEach(function (el) {
-        // arrowDirection + 180 is omdat image op de kop is
-        el.style.transform = "rotate(" + (arrowDirection + 180) + "deg)"
+        // windDirection + 180 is omdat image op de kop is
+        // -51 toegevoegt op basis van windDirection console log = 206. huidige wind direction zegt gewoon 155. (206-155 = 51)
+        el.style.transform = "rotate(" + (windDirection + 180 - 51) + "deg)"
+        // console.log(windDirection)
     })
 }
 
 function parseArrowWeather({ hourly }) {
     const {
-        winddirection_10m: [arrowDirection],
+        winddirection_10m: [windDirection],
     } = hourly
-    // console.log(arrowDirection)
+    // console.log(windDirection)
 
-    arrowRotate(document.querySelectorAll('.green-arrow-current'), arrowDirection)
+    arrowRotate(document.querySelectorAll('.green-arrow-current'), windDirection)
+    console.log(windDirection)
     return {
-        arrowDirection: Math.round(arrowDirection),
+        windDirection: Math.round(windDirection),
     }
 }
 //
@@ -109,7 +113,7 @@ function parseCurrentWeather({ current_weather, daily }) {
     const {
         temperature: currentTemp,
         // current wind is geplaatst door tutorial, maar ik heb hem devined inde daily const
-        // windDirection: windDirection,
+        // windDirection: currentWind,
         //change it back to windDirection because daily and hour are not current
         weathercode: iconCode,
     } = current_weather

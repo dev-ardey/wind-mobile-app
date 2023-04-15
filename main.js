@@ -99,174 +99,15 @@ function renderHourlyWeather(hourly) {
   })
 }
 
-// current wind-direction colour
-// air-api tijdelijk gecomment want nieuwe functie is net als dit plus +
-// if ("geolocation" in navigator) {
-//   navigator.geolocation.getCurrentPosition(function (position) {
-//     var lat = position.coords.latitude;
-//     var lon = position.coords.longitude;
 
-//     // Calculate the bearing between the current location and A
-//     var bearing = calculateBearingOriginal(lat, lon, 52.4831765, 4.5729285);
-
-//     // Calculate the opposite direction of the bearing to get the direction from A to the current location
-//     var fromADeg = (bearing + 180) % 360;
-
-//     // Get wind direction data from an API
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${52.4831765}&lon=${4.5729285}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
-//       .then(response => response.json())
-//       .then(data => {
-//         var windDeg = data.wind.deg;
-
-//         // Check if wind is blowing from A towards the current location
-//         if (windBlowingFrom(windDeg, fromADeg)) {
-//           // doX();
-//           // call function to do X
-//           document.getElementById("wind-direction").style.backgroundColor = "green";
-//         } else {
-//           document.getElementById("wind-direction").style.backgroundColor = "red";
-//         }
-//       });
-//   });
-// }
-
-// function calculateBearingOriginal(lat1, lon1, lat2, lon2) {
-//   // Convert coordinates to radians
-//   var lat1Rad = deg2rad(lat1);
-//   var lon1Rad = deg2rad(lon1);
-//   var lat2Rad = deg2rad(lat2);
-//   var lon2Rad = deg2rad(lon2);
-
-//   // Calculate bearing using the Haversine formula
-//   var y = Math.sin(lon2Rad - lon1Rad) * Math.cos(lat2Rad);
-//   var x = Math.cos(lat1Rad) * Math.sin(lat2Rad) - Math.sin(lat1Rad) * Math.cos(lat2Rad) * Math.cos(lon2Rad - lon1Rad);
-//   var bearingRad = Math.atan2(y, x);
-
-//   // Convert bearing to degrees
-//   var bearing = rad2deg(bearingRad);
-
-//   return bearing;
-// }
-
-// function deg2rad(degrees) {
-//   return degrees * (Math.PI / 180);
-// }
-
-// function rad2deg(radians) {
-//   return radians * (180 / Math.PI);
-// }
-
-// function windBlowingFrom(windDeg, fromADeg) {
-//   // Calculate the difference between the wind direction and the direction from A to the current location
-//   var diff = windDeg - fromADeg;
-
-//   // Adjust for negative angles
-//   if (diff < -180) {
-//     diff += 360;
-//   } else if (diff > 180) {
-//     diff -= 360;
-//   }
-
-//   // Check if the difference is between -90 and 90 degrees
-//   return (diff >= -90 && diff <= 90);
-// }
-
-
-
-// function to do somthing with the input like change html class
-// function doX() {
-//   console.log('the wind is okey')
-// }
-
-
-
-
-
-
-
-// api + 6days 
-// const apiKey = '97d43aa82bbe2a80042bef503d4d9a34'; // replace with your OpenWeatherMap API key
-// const locationA = { lat: 52.4831765, lon: 4.5729285 }; // replace with your desired location A coordinates
-
-// // function to get daily weather data for the next 7 days
-// async function getDailyWeatherData() {
-//   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${locationA.lat}&lon=${locationA.lon}&exclude=current,minutely,hourly&units=metric&appid=${apiKey}`;
-//   const response = await fetch(url);
-//   const data = await response.json();
-//   return data.daily;
-// }
-
-// // function to check if wind is blowing from location A towards current location
-// function isWindBlowingFromLocationA(dailyWeatherData) {
-//   const windDirection = dailyWeatherData[0].wind_deg;
-//   const angleToLocationA = getAngleToLocationA();
-//   const difference = angleToLocationA - windDirection;
-//   if (difference > 180) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
-
-// // function to get the angle between the current location and location A
-// function getAngleToLocationA() {
-//   const lat1 = toRadians(locationA.lat);
-//   const lon1 = toRadians(locationA.lon);
-//   const lat2 = toRadians(currentLocation.lat);
-//   const lon2 = toRadians(currentLocation.lon);
-
-//   const y = Math.sin(lon2 - lon1) * Math.cos(lat2);
-//   const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1);
-//   const angle = toDegrees(Math.atan2(y, x));
-
-//   return (angle + 360) % 360;
-// }
-
-// // function to convert degrees to radians
-// function toRadians(degrees) {
-//   return degrees * (Math.PI / 180);
-// }
-
-// // function to convert radians to degrees
-// function toDegrees(radians) {
-//   return radians * (180 / Math.PI);
-// }
-
-// // function to update the background color of the wind direction element
-// function updateWindDirectionColor(isBlowingFromLocationA) {
-//   const windDirectionElement = document.querySelector('#wind-direction');
-//   if (isBlowingFromLocationA) {
-//     windDirectionElement.style.backgroundColor = 'red';
-//   } else {
-//     windDirectionElement.style.backgroundColor = 'green';
-//   }
-// }
-
-// // get daily weather data for the next 7 days
-// getDailyWeatherData()
-// .then(data => {
-//   for (let i = 0; i < data.length; i++) {
-//     const weather = data[i];
-//     const isBlowingFromLocationA = isWindBlowingFromLocationA(weather.wind_deg, weather.wind_speed);
-//     const date = new Date(weather.dt * 1000); // convert Unix timestamp to JavaScript date
-//     console.log(`Day ${i+1}: ${date.toLocaleDateString()} - Wind is blowing from location A: ${isBlowingFromLocationA}`);
-//     updateWindDirectionColor(isBlowingFromLocationA);
-//   }
-// })
-// .catch(error => {
-//   console.error(error);
-// });
-
-
-
-
-
-// new timer function 
+// working timer function only going -
+var fromADeg; // Define the variable outside the callback function
 
 if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(function (position) {
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
+    console.log(position)
 
     // Calculate the bearing between the current location and A
     var bearing = calculateBearing(lat, lon, 52.4831765, 4.5729285);
@@ -363,18 +204,174 @@ function calculateTimeToChange(windDeg, fromADeg) {
   return Math.round(timeToChange * 60);
 }
 
-fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${52.4831765}&lon=${4.5729285}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
+
+// fetche is dubble but this edited so that it affects current wind and location
+
+// Fetch forecasted weather data 
+fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${52.4831765}&lon=${4.5729285}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
   .then(response => response.json())
   .then(data => {
-    var windDeg = data.wind.deg;
+    // Extract forecasted wind direction for the next hour
+    var windDeg = data.list[0].wind.deg;
+    // console.log(data.list)
 
     // Check if wind is blowing from A towards the current location
     if (windBlowingFrom(windDeg, fromADeg)) {
       var timeToChange = calculateTimeToChange(windDeg, fromADeg);
-      document.getElementById("wind-direction").innerHTML = `The wind will change direction in ${timeToChange} minutes`;
+      updateTimer(timeToChange * 60); // convert time to seconds
       document.getElementById("wind-direction").style.backgroundColor = "green";
+      document.getElementById("current-location-id").style.backgroundColor = "black";
     } else {
       document.getElementById("wind-direction").innerHTML = "The wind is not blowing from A towards your location";
       document.getElementById("wind-direction").style.background = "red";
+      document.getElementById("current-location-id").style.backgroundColor = "black";
+      //change current-location-id to current location with the data.city.name from the api
+      document.getElementById("current-location-id").textContent=data.city.name;
     }
   });
+
+// new code updating timer
+function updateTimer(secondsRemaining) {
+  var timerElement = document.getElementById("wind-direction");
+  if (secondsRemaining >= 0) {
+    timerElement.innerHTML = "Wind direction will change in " + secondsRemaining + " seconds.";
+    secondsRemaining--;
+    setTimeout(function () { updateTimer(secondsRemaining); }, 1000);
+  } else {
+    timerElement.innerHTML = "";
+  }
+}
+
+
+// new specific weather function die zelf geolocation van user pakt
+
+// doet nu niets 
+
+// function getWeatherData() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var lat = position.coords.latitude;
+//       var lon = position.coords.longitude;
+//         var A_LAT = 52.4831765;
+//         var A_LON = 4.5729285;
+//       var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=97d43aa82bbe2a80042bef503d4d9a34`;
+      
+//       fetch(apiUrl)
+//         .then(response => response.json())
+//         .then(data => {
+//           var windDeg = data.wind.deg;
+//           var fromADeg = calculateBearing(lat, lon, A_LAT, A_LON);
+          
+//           // Check if wind is blowing from A towards the current location
+//           if (windBlowingFrom(windDeg, fromADeg)) {
+//             var timeToChange = calculateTimeToChange(windDeg, fromADeg);
+//             var timeString = secondsToTimeString(timeToChange * 60);
+//             document.getElementById("wind-direction").innerHTML = `The wind will change direction in ${timeString}`;
+//             document.getElementById("wind-direction").style.backgroundColor = "green";
+//           } else {
+//             document.getElementById("wind-direction").innerHTML = "The wind is not blowing from A towards your location";
+//             document.getElementById("wind-direction").style.background = "red";
+//           }
+//         });
+//     });
+//   } else {
+//     console.log("Geolocation is not supported by this browser.");
+//   }
+// }
+// getWeatherData()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// improved versie ervan proberen , deze is ook zelfde als eerste code hiervoor, als dit werkt mag alle andere ai code weg
+
+
+// function calculateTimeToChange(lat, lon) {
+//   const API_KEY = '97d43aa82bbe2a80042bef503d4d9a34';
+//   const endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+
+//   fetch(endpoint)
+//     .then((response) => {
+//       if (response.ok) {
+//         return response.json();
+//       }
+//       throw new Error('Network response was not ok.');
+//     })
+//     .then((data) => {
+//       const windBlowingFrom = data.list[0].wind.deg;
+//       const timeToChange = calculateBeating(windBlowingFrom, data.city.coord.lat, data.city.coord.lon, lat, lon);
+//       const timeToChangeString = secondsToTimeString(timeToChange);
+//       updateTimer(timeToChangeString);
+//     })
+//     .catch((error) => {
+//       console.error('There has been a problem with your fetch operation:', error);
+//     });
+// }
+
+// function calculateBeating(windDegrees, lat1, lon1, lat2, lon2) {
+//   const R = 6371e3; // metres
+//   const φ1 = (lat1 * Math.PI) / 180; // φ, λ in radians
+//   const φ2 = (lat2 * Math.PI) / 180;
+//   const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+//   const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+//   const θ = Math.atan2(
+//     Math.sin(Δλ) * Math.cos(φ2),
+//     Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ)
+//   ); // θ in radians
+//   let direction = (θ * 180) / Math.PI; // degrees
+//   if (direction < 0) {
+//     direction += 360;
+//   }
+//   const bearing = (windDegrees - direction + 360) % 360;
+//   const beating = (bearing / 180) * Math.PI; // radians
+//   const distance = Math.acos(Math.sin(φ1) * Math.sin(φ2) + Math.cos(φ1) * Math.cos(φ2) * Math.cos(Δλ)) * R; // metres
+//   const timeToChange = distance / (Math.sin(beating) * 10); // seconds
+//   return timeToChange;
+// }
+
+// function secondsToTimeString(seconds) {
+//   const days = Math.floor(seconds / (24 * 60 * 60));
+//   const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+//   const minutes = Math.floor((seconds % (60 * 60)) / 60);
+//   const secondsLeft = seconds % 60;
+//   let timeString = '';
+//   if (days > 0) {
+//     timeString += `${days} day${days > 1 ? 's' : ''}, `;
+//   }
+//   if (hours > 0) {
+//     timeString += `${hours} hour${hours > 1 ? 's' : ''}, `;
+//   }
+//   if (minutes > 0) {
+//     timeString += `${minutes} minute${minutes > 1 ? 's' : ''}, `;
+//   }
+//   timeString += `${secondsLeft} second${secondsLeft > 1 ? 's' : ''}`;
+//   return timeString;
+// }
+
+// function updateTimer(timeString) {
+//   const timerElement = document.getElementById('timer');
+//   timerElement.textContent = `Time to change: ${timeString}`;
+// }
+
+
+
+
+
+
+
+
+
+  
