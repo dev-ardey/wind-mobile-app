@@ -84,7 +84,7 @@ function arrowRotate(elems, windDirection) {
     elems.forEach(function (el) {
         // windDirection + 180 is omdat image op de kop is
         // -51 toegevoegt op basis van windDirection console log = 206. huidige wind direction zegt gewoon 155. (206-155 = 51)
-        el.style.transform = "rotate(" + (windDirection + 180 - 51) + "deg)"
+        el.style.transform = "rotate(" + (windDirection + 180) + "deg)"
         // console.log(windDirection)
     })
 }
@@ -96,7 +96,7 @@ function parseArrowWeather({ hourly }) {
     // console.log(windDirection)
 
     arrowRotate(document.querySelectorAll('.green-arrow-current'), windDirection)
-    console.log(windDirection)
+    // console.log(windDirection)
     return {
         windDirection: Math.round(windDirection),
     }

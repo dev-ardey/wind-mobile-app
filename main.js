@@ -214,19 +214,18 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${52.4831765}&lon=${
     // Extract forecasted wind direction for the next hour
     var windDeg = data.list[0].wind.deg;
     // console.log(data.list)
+    //change current-location-id to current location with the data.city.name from the api
+    document.getElementById("current-location-id").textContent=data.city.name;
 
     // Check if wind is blowing from A towards the current location
     if (windBlowingFrom(windDeg, fromADeg)) {
       var timeToChange = calculateTimeToChange(windDeg, fromADeg);
       updateTimer(timeToChange * 60); // convert time to seconds
       document.getElementById("wind-direction").style.backgroundColor = "green";
-      document.getElementById("current-location-id").style.backgroundColor = "black";
+      
     } else {
       document.getElementById("wind-direction").innerHTML = "The wind is not blowing from A towards your location";
-      document.getElementById("wind-direction").style.background = "red";
-      document.getElementById("current-location-id").style.backgroundColor = "black";
-      //change current-location-id to current location with the data.city.name from the api
-      document.getElementById("current-location-id").textContent=data.city.name;
+      document.getElementById("wind-direction").style.background = "red";  
     }
   });
 
