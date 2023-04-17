@@ -56,6 +56,17 @@ function arrowRotate(elems, windDirection) {
   })
 }
 
+function arrowColor(elems) {
+  if (elems.length == 0) return;
+  elems.forEach(function (el) {
+    // windDirection + 180 is omdat image op de kop is
+    // el.style.backgroundColor = 'red'
+    el.src = "images/red-arrow.svg";
+
+  })
+}
+
+
 //run a formatter that will run just the day portion of the weekday
 // short / long is the language quat spells out the day depending on the language of the user
 const DAY_FORMATTER = Intl.DateTimeFormat(undefined, { weekday: "short" })
@@ -74,6 +85,15 @@ function renderDailyWeather(daily) {
     element.querySelector("[data-icon]").src = getIconUrl(day.iconCode)
     dailySection.append(element)
     arrowRotate([document.querySelectorAll('.green-arrow-day')[index]], (day.windDirection))
+
+    // verander naar Verander de if naar if wind direction from towards user
+    // versimpeld om te testen
+    console.log(day.windDirection)
+    if ((day.windDirection > 0 && day.windDirection < 40) || ((day.windDirection > 340 && day.windDirection < 360))) {
+      // green-arrow-hour-id
+      // document.getElementById("green-arrow-hour-id").style.background = "red";
+      arrowColor([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection)
+    }
 
   })
 }
@@ -96,6 +116,16 @@ function renderHourlyWeather(hourly) {
     hourlySection.append(element)
     arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
 
+
+
+    // verander naar Verander de if naar if wind direction from towards user
+    // versimpeld om te testen
+    // console.log(hour.windDirection)
+    if ((hour.windDirection > 0 && hour.windDirection < 40) || ((hour.windDirection > 340 && hour.windDirection < 360))) {
+      // green-arrow-hour-id
+      // document.getElementById("green-arrow-hour-id").style.background = "red";
+      arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
+    }
   })
 }
 
@@ -215,17 +245,17 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${52.4831765}&lon=${
     var windDeg = data.list[0].wind.deg;
     // console.log(data.list)
     //change current-location-id to current location with the data.city.name from the api
-    document.getElementById("current-location-id").textContent=data.city.name;
+    document.getElementById("current-location-id").textContent = data.city.name;
 
     // Check if wind is blowing from A towards the current location
     if (windBlowingFrom(windDeg, fromADeg)) {
       var timeToChange = calculateTimeToChange(windDeg, fromADeg);
       updateTimer(timeToChange * 60); // convert time to seconds
       document.getElementById("wind-direction").style.backgroundColor = "green";
-      
+
     } else {
       document.getElementById("wind-direction").innerHTML = "The wind is not blowing from A towards your location";
-      document.getElementById("wind-direction").style.background = "red";  
+      document.getElementById("wind-direction").style.background = "red";
     }
   });
 
@@ -254,13 +284,13 @@ function updateTimer(secondsRemaining) {
 //         var A_LAT = 52.4831765;
 //         var A_LON = 4.5729285;
 //       var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=97d43aa82bbe2a80042bef503d4d9a34`;
-      
+
 //       fetch(apiUrl)
 //         .then(response => response.json())
 //         .then(data => {
 //           var windDeg = data.wind.deg;
 //           var fromADeg = calculateBearing(lat, lon, A_LAT, A_LON);
-          
+
 //           // Check if wind is blowing from A towards the current location
 //           if (windBlowingFrom(windDeg, fromADeg)) {
 //             var timeToChange = calculateTimeToChange(windDeg, fromADeg);
@@ -373,4 +403,3 @@ function updateTimer(secondsRemaining) {
 
 
 
-  
