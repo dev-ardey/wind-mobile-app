@@ -12,7 +12,7 @@ function positionSucces({ coords }) {
     coords.latitude,
     coords.longitude,
     Intl.DateTimeFormat().resolvedOptions().timeZone).then(renderWeather).catch(e => {
-      console.log(e)
+      // console.log(e)
       alert("Error getting weather information.")
     })
 }
@@ -87,8 +87,8 @@ function renderDailyWeather(daily) {
     arrowRotate([document.querySelectorAll('.green-arrow-day')[index]], (day.windDirection))
 
     // verander naar Verander de if naar if wind direction from towards user
-    // versimpeld om te testen
-    console.log(day.windDirection)
+    // versimpeld om te testen samen met de console log
+    // console.log(day.windDirection)
     if ((day.windDirection > 0 && day.windDirection < 40) || ((day.windDirection > 340 && day.windDirection < 360))) {
       // green-arrow-hour-id
       // document.getElementById("green-arrow-hour-id").style.background = "red";
@@ -121,7 +121,7 @@ function renderHourlyWeather(hourly) {
     // verander naar Verander de if naar if wind direction from towards user
     // versimpeld om te testen
     // console.log(hour.windDirection)
-    if ((hour.windDirection > 0 && hour.windDirection < 40) || ((hour.windDirection > 340 && hour.windDirection < 360))) {
+    if ((hour.windDirection > 0 && hour.windDirection < 40) || ((hour.windDirection > 300 && hour.windDirection < 360))) {
       // green-arrow-hour-id
       // document.getElementById("green-arrow-hour-id").style.background = "red";
       arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
@@ -138,6 +138,7 @@ if ("geolocation" in navigator) {
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     console.log(position)
+    // console.log(position) // only gives long and lat
 
     // Calculate the bearing between the current location and A
     var bearing = calculateBearing(lat, lon, 52.4831765, 4.5729285);
@@ -150,15 +151,21 @@ if ("geolocation" in navigator) {
       .then(response => response.json())
       .then(data => {
         var windDeg = data.wind.deg;
+        // console.log(data.name)
+        // console.log(data.coord)
+
+
 
         // Check if wind is blowing from A towards the current location
         if (windBlowingFrom(windDeg, fromADeg)) {
           // doX();linear-gradient
           // call function to do X
-          document.getElementById("wind-direction").style.background = "linear-gradient( rgb(39, 255, 208), rgb(0, 255, 21))";
+          // document.getElementById("wind-direction").style.background = "linear-gradient( rgb(39, 255, 208), rgb(0, 255, 21))";
+          document.getElementById("wind-direction").style.border = "2px solid rgb(0, 255, 21)";
           document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
         } else {
-          document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";
+          // document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";
+          document.getElementById("wind-direction").style.border = "2px solid rgb(255, 112, 119)";
           document.getElementById("green-arrow-id").src = "images/red-arrow.svg";
           // Calculate the time until the wind direction changes towards the user from point A
           var timeToChange = calculateTimeToChange(windDeg, fromADeg);
@@ -243,7 +250,7 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${52.4831765}&lon=${
   .then(data => {
     // Extract forecasted wind direction for the next hour
     var windDeg = data.list[0].wind.deg;
-    // console.log(data.list)
+    // console.log(data.city)
     //change current-location-id to current location with the data.city.name from the api
     document.getElementById("current-location-id").textContent = data.city.name;
 
@@ -254,8 +261,7 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${52.4831765}&lon=${
       document.getElementById("wind-direction").style.backgroundColor = "green";
 
     } else {
-      document.getElementById("wind-direction").innerHTML = "The wind is not blowing from A towards your location";
-      document.getElementById("wind-direction").style.background = "red";
+      document.getElementById("wind-direction").innerHTML = "The wind is not blowing from tatasteel towards your location";
     }
   });
 
@@ -394,7 +400,6 @@ function updateTimer(secondsRemaining) {
 //   const timerElement = document.getElementById('timer');
 //   timerElement.textContent = `Time to change: ${timeString}`;
 // }
-
 
 
 

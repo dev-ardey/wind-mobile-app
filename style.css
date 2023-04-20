@@ -99,7 +99,7 @@ body {
   width: 100%;
   height: 70%;
   margin-bottom: -20%;
-  margin-top: -30%;
+  margin-top: -20%;
   /* button colors for js */
   /* background: linear-gradient(rgb(252, 74, 127),rgb(255, 112, 119)); */
   /* background: linear-gradient(rgb(0, 255, 21), rgb(39, 255, 208)); */
@@ -110,6 +110,30 @@ body {
   justify-content: center;
   align-self: center;
 } */
+
+
+/* animation */
+
+.header-top {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+
+
+
+
+/* /animation */
 
 #wind-direction {
   
@@ -181,7 +205,6 @@ body {
   margin-bottom: 10%;
   margin-top: -5%;
 }
-
 
 .info-grounp {
   display: flex;

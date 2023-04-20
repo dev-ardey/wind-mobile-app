@@ -11,10 +11,11 @@ export function getWeather(lat, lon, timezone) {
                     timezone,
                 }
             })
+            
         .then(({ data }) => {
             // exampleof parse daily time.map
             // return data
-
+            // console.log(data)
             return {
                 current: parseCurrentWeather(data),
                 daily: parseDailyWeather(data),
