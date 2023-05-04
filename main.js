@@ -66,6 +66,13 @@ function arrowColor(elems) {
   })
 }
 
+// new function that selects a new image for the fitting coordinates, in hour maak een if (wind is 350 - 20) { geef src img map-0}
+function imageSelector(elems, windDirection) {
+  if (elems.length == 0) return;
+  elems.forEach(function (el){
+    document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
+  })
+}
 
 //run a formatter that will run just the day portion of the weekday
 // short / long is the language quat spells out the day depending on the language of the user
@@ -104,7 +111,30 @@ const hourRowTemplate = document.getElementById("hour-row-template")
 function renderHourlyWeather(hourly) {
   //take hourlySection and remove given html
   hourlySection.innerHTML = ""
+
+  // new code iterate
+
+  // new code iterate
   hourly.forEach((hour, index) => {
+    // console.log(hour.windDirection)
+    function countIterationsBeforeColorChange(hour) {
+      let iterations = 0;
+      let prevWindDirection = null;
+      for (let i = 0; i < hour.windDirection.length; i++) {
+        const hour = hour.windDirection[i];
+        if (prevWindDirection !== null && (
+          (prevWindDirection <= 40 && hour.windDirection >= 300) ||
+          (prevWindDirection >= 300 && hour.windDirection <= 40)
+        )) {
+          // wind direction value changed to a new range
+          console.log(`Arrow color will change after ${iterations} iterations.`);
+          iterations = 0;
+        }
+        prevWindDirection = hour.windDirection;
+        iterations++;
+      }
+    } 
+    // console.log(hour.windDirection)
     const element = hourRowTemplate.content.cloneNode(true)
     setValue("temp", hour.temp, { parent: element })
     // ik denk windDirection, check of werkt
@@ -117,7 +147,7 @@ function renderHourlyWeather(hourly) {
     arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
 
 
-
+    
     // verander naar Verander de if naar if wind direction from towards user
     // versimpeld om te testen
     // console.log(hour.windDirection)
@@ -400,6 +430,8 @@ function updateTimer(secondsRemaining) {
 //   const timerElement = document.getElementById('timer');
 //   timerElement.textContent = `Time to change: ${timeString}`;
 // }
+
+
 
 
 
