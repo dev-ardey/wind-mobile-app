@@ -176,6 +176,10 @@ if ("geolocation" in navigator) {
     // Calculate the opposite direction of the bearing to get the direction from A to the current location
     var fromADeg = (bearing + 180) % 360;
 
+
+
+
+
     // Get wind direction data from an API
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${52.4831765}&lon=${4.5729285}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
       .then(response => response.json())
@@ -183,7 +187,7 @@ if ("geolocation" in navigator) {
         var windDeg = data.wind.deg;
         // console.log(data.name)
         // console.log(data.coord)
-
+        console.log(data)
 
 
         // Check if wind is blowing from A towards the current location
@@ -193,12 +197,14 @@ if ("geolocation" in navigator) {
           // document.getElementById("wind-direction").style.background = "linear-gradient( rgb(39, 255, 208), rgb(0, 255, 21))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(0, 255, 21)";
           document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
+          document.getElementById("wind-direction").innerHTML = "The wind is not blowing from tatasteel towards your location";
         } else {
           // document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(255, 112, 119)";
           document.getElementById("green-arrow-id").src = "images/red-arrow.svg";
           // Calculate the time until the wind direction changes towards the user from point A
           var timeToChange = calculateTimeToChange(windDeg, fromADeg);
+          updateTimer(timeToChange * 60); // convert time to seconds
 
           // Update the HTML element with the ID "wind-direction" to show the remaining time until the wind direction changes
           document.getElementById("wind-direction").innerHTML = "Time until wind direction change: " + timeToChange + " seconds";
@@ -210,6 +216,20 @@ if ("geolocation" in navigator) {
       });
   });
 }
+
+// new code updating timer
+function updateTimer(secondsRemaining) {
+  var timerElement = document.getElementById("wind-direction");
+  if (secondsRemaining >= 0) {
+    timerElement.innerHTML = "Wind direction will change in " + secondsRemaining + " seconds.";
+    secondsRemaining--;
+    setTimeout(function () { updateTimer(secondsRemaining); }, 1000);
+  } else {
+    timerElement.innerHTML = "";
+  }
+}
+
+
 
 function calculateBearing(lat1, lon1, lat2, lon2) {
   // Convert coordinates to radians
@@ -270,91 +290,6 @@ function calculateTimeToChange(windDeg, fromADeg) {
   // Return the time in minutes rounded to the nearest integer
   return Math.round(timeToChange * 60);
 }
-
-
-// fetche is dubble but this edited so that it affects current wind and location
-
-// Fetch forecasted weather data 
-fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${52.4831765}&lon=${4.5729285}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
-  .then(response => response.json())
-  .then(data => {
-    // Extract forecasted wind direction for the next hour
-    var windDeg = data.list[0].wind.deg;
-    // console.log(data.city)
-    //change current-location-id to current location with the data.city.name from the api
-    document.getElementById("current-location-id").textContent = data.city.name;
-
-    // Check if wind is blowing from A towards the current location
-    if (windBlowingFrom(windDeg, fromADeg)) {
-      var timeToChange = calculateTimeToChange(windDeg, fromADeg);
-      updateTimer(timeToChange * 60); // convert time to seconds
-      document.getElementById("wind-direction").style.backgroundColor = "green";
-
-    } else {
-      document.getElementById("wind-direction").innerHTML = "The wind is not blowing from tatasteel towards your location";
-    }
-  });
-
-// new code updating timer
-function updateTimer(secondsRemaining) {
-  var timerElement = document.getElementById("wind-direction");
-  if (secondsRemaining >= 0) {
-    timerElement.innerHTML = "Wind direction will change in " + secondsRemaining + " seconds.";
-    secondsRemaining--;
-    setTimeout(function () { updateTimer(secondsRemaining); }, 1000);
-  } else {
-    timerElement.innerHTML = "";
-  }
-}
-
-
-// new specific weather function die zelf geolocation van user pakt
-
-// doet nu niets 
-
-// function getWeatherData() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       var lat = position.coords.latitude;
-//       var lon = position.coords.longitude;
-//         var A_LAT = 52.4831765;
-//         var A_LON = 4.5729285;
-//       var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=97d43aa82bbe2a80042bef503d4d9a34`;
-
-//       fetch(apiUrl)
-//         .then(response => response.json())
-//         .then(data => {
-//           var windDeg = data.wind.deg;
-//           var fromADeg = calculateBearing(lat, lon, A_LAT, A_LON);
-
-//           // Check if wind is blowing from A towards the current location
-//           if (windBlowingFrom(windDeg, fromADeg)) {
-//             var timeToChange = calculateTimeToChange(windDeg, fromADeg);
-//             var timeString = secondsToTimeString(timeToChange * 60);
-//             document.getElementById("wind-direction").innerHTML = `The wind will change direction in ${timeString}`;
-//             document.getElementById("wind-direction").style.backgroundColor = "green";
-//           } else {
-//             document.getElementById("wind-direction").innerHTML = "The wind is not blowing from A towards your location";
-//             document.getElementById("wind-direction").style.background = "red";
-//           }
-//         });
-//     });
-//   } else {
-//     console.log("Geolocation is not supported by this browser.");
-//   }
-// }
-// getWeatherData()
-
-
-
-
-
-
-
-
-
-
-
 
 
 
