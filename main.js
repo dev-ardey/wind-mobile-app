@@ -67,10 +67,18 @@ function arrowColor(elems) {
 }
 
 // new function that selects a new image for the fitting coordinates, in hour maak een if (wind is 350 - 20) { geef src img map-0}
+// function imageSelector(elems, windDirection) {
+//   if (elems.length == 0) return;
+//   elems.forEach(function (el) {
+//     document.getElementById("temp-map-img").src = "images/green-arrow.svg";
+//   })
+// }
+
+// test new function with if statement
 function imageSelector(elems, windDirection) {
   if (elems.length == 0) return;
-  elems.forEach(function (el){
-    document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
+  elems.forEach(function (el) {
+    document.getElementById("temp-map-img").src = "images/green-arrow.svg";
   })
 }
 
@@ -116,25 +124,6 @@ function renderHourlyWeather(hourly) {
 
   // new code iterate
   hourly.forEach((hour, index) => {
-    // console.log(hour.windDirection)
-    function countIterationsBeforeColorChange(hour) {
-      let iterations = 0;
-      let prevWindDirection = null;
-      for (let i = 0; i < hour.windDirection.length; i++) {
-        const hour = hour.windDirection[i];
-        if (prevWindDirection !== null && (
-          (prevWindDirection <= 40 && hour.windDirection >= 300) ||
-          (prevWindDirection >= 300 && hour.windDirection <= 40)
-        )) {
-          // wind direction value changed to a new range
-          console.log(`Arrow color will change after ${iterations} iterations.`);
-          iterations = 0;
-        }
-        prevWindDirection = hour.windDirection;
-        iterations++;
-      }
-    } 
-    // console.log(hour.windDirection)
     const element = hourRowTemplate.content.cloneNode(true)
     setValue("temp", hour.temp, { parent: element })
     // ik denk windDirection, check of werkt
@@ -146,8 +135,17 @@ function renderHourlyWeather(hourly) {
     hourlySection.append(element)
     arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
 
+    // testcode
+    // var windDeg = hour.windDirection;
+    //     console.log(hour.windDirection)
 
-    
+
+    //     if (windBlowingFrom(windDeg, fromADeg)) {
+    //       document.getElementById("wind-direction").style.border = "8px solid rgb(0, 255, 21)";
+    //       document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
+    //     }
+    // /testcode
+
     // verander naar Verander de if naar if wind direction from towards user
     // versimpeld om te testen
     // console.log(hour.windDirection)
@@ -159,15 +157,14 @@ function renderHourlyWeather(hourly) {
   })
 }
 
+// console.log(fromADeg)
 
 // working timer function only going -
 var fromADeg; // Define the variable outside the callback function
-
 if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(function (position) {
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
-    console.log(position)
     // console.log(position) // only gives long and lat
 
     // Calculate the bearing between the current location and A
@@ -175,21 +172,18 @@ if ("geolocation" in navigator) {
 
     // Calculate the opposite direction of the bearing to get the direction from A to the current location
     var fromADeg = (bearing + 180) % 360;
+    // console.log(fromADeg)
 
 
 
-
-
+    // data api changing function
     // Get wind direction data from an API
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${52.4831765}&lon=${4.5729285}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
       .then(response => response.json())
       .then(data => {
         var windDeg = data.wind.deg;
-        // console.log(data.name)
-        // console.log(data.coord)
-        console.log(data)
-
-
+        // console.log(data)
+        
         // Check if wind is blowing from A towards the current location
         if (windBlowingFrom(windDeg, fromADeg)) {
           // doX();linear-gradient
@@ -197,37 +191,50 @@ if ("geolocation" in navigator) {
           // document.getElementById("wind-direction").style.background = "linear-gradient( rgb(39, 255, 208), rgb(0, 255, 21))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(0, 255, 21)";
           document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
-          document.getElementById("wind-direction").innerHTML = "The wind is not blowing from tatasteel towards your location";
+          document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is not blowing towards your location";
         } else {
           // document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(255, 112, 119)";
           document.getElementById("green-arrow-id").src = "images/red-arrow.svg";
+          document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is blowing towards your location";
+          // console.log(fromADeg)
+          return fromADeg
           // Calculate the time until the wind direction changes towards the user from point A
-          var timeToChange = calculateTimeToChange(windDeg, fromADeg);
-          updateTimer(timeToChange * 60); // convert time to seconds
+          // var timeToChange = calculateTimeToChange(windDeg, fromADeg);
+          // updateTimer(timeToChange * 60); 
+          // convert time to seconds
 
           // Update the HTML element with the ID "wind-direction" to show the remaining time until the wind direction changes
-          document.getElementById("wind-direction").innerHTML = "Time until wind direction change: " + timeToChange + " seconds";
-          setInterval(function () {
-            timeToChange--;
-            document.getElementById("wind-direction").innerHTML = "Time until wind direction change: " + timeToChange + " seconds";
-          }, 1000);
+          // document.getElementById("wind-direction").innerHTML = "Time until wind direction change: " + timeToChange + " seconds";
+          // setInterval(function () {
+          //   timeToChange--;
+          //   document.getElementById("wind-direction").innerHTML = "Time until wind direction change: " + timeToChange + " seconds";
+          // }, 1000);
         }
       });
   });
 }
 
+// even functies veranderen terug roepen tijd functie
+
+
 // new code updating timer
-function updateTimer(secondsRemaining) {
-  var timerElement = document.getElementById("wind-direction");
-  if (secondsRemaining >= 0) {
-    timerElement.innerHTML = "Wind direction will change in " + secondsRemaining + " seconds.";
-    secondsRemaining--;
-    setTimeout(function () { updateTimer(secondsRemaining); }, 1000);
-  } else {
-    timerElement.innerHTML = "";
-  }
-}
+
+// de if statement doet nu niets in deze functie
+// function updateTimer(secondsRemaining) {
+//   // why is secondsRemaining -9240???
+//   // volgends mij zegt secondsRemaining helemaal niets
+//   console.log(secondsRemaining)
+
+//   var timerElement = document.getElementById("wind-direction");
+//   if (secondsRemaining >= 0) {
+//     timerElement.innerHTML = "Wind direction will change in " + secondsRemaining + " seconds.";
+//     secondsRemaining--;
+//     setTimeout(function () { updateTimer(secondsRemaining); }, 1000);
+//   } else {
+//     timerElement.innerHTML = "";
+//   }
+// }
 
 
 
@@ -273,105 +280,20 @@ function windBlowingFrom(windDeg, fromADeg) {
 }
 
 
-function calculateTimeToChange(windDeg, fromADeg) {
-  // Calculate the difference between the wind direction and the direction from A to the current location
-  var diff = windDeg - fromADeg;
+// function calculateTimeToChange(windDeg, fromADeg) {
+//   // Calculate the difference between the wind direction and the direction from A to the current location
+//   var diff = windDeg - fromADeg;
 
-  // Adjust for negative angles
-  if (diff < -180) {
-    diff += 360;
-  } else if (diff > 180) {
-    diff -= 360;
-  }
-
-  // Calculate the time until the wind direction changes towards the user from point A
-  var timeToChange = diff / 45; // assuming wind changes direction every 45 degrees
-
-  // Return the time in minutes rounded to the nearest integer
-  return Math.round(timeToChange * 60);
-}
-
-
-
-
-
-
-// improved versie ervan proberen , deze is ook zelfde als eerste code hiervoor, als dit werkt mag alle andere ai code weg
-
-
-// function calculateTimeToChange(lat, lon) {
-//   const API_KEY = '97d43aa82bbe2a80042bef503d4d9a34';
-//   const endpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-
-//   fetch(endpoint)
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();
-//       }
-//       throw new Error('Network response was not ok.');
-//     })
-//     .then((data) => {
-//       const windBlowingFrom = data.list[0].wind.deg;
-//       const timeToChange = calculateBeating(windBlowingFrom, data.city.coord.lat, data.city.coord.lon, lat, lon);
-//       const timeToChangeString = secondsToTimeString(timeToChange);
-//       updateTimer(timeToChangeString);
-//     })
-//     .catch((error) => {
-//       console.error('There has been a problem with your fetch operation:', error);
-//     });
-// }
-
-// function calculateBeating(windDegrees, lat1, lon1, lat2, lon2) {
-//   const R = 6371e3; // metres
-//   const φ1 = (lat1 * Math.PI) / 180; // φ, λ in radians
-//   const φ2 = (lat2 * Math.PI) / 180;
-//   const Δφ = ((lat2 - lat1) * Math.PI) / 180;
-//   const Δλ = ((lon2 - lon1) * Math.PI) / 180;
-//   const θ = Math.atan2(
-//     Math.sin(Δλ) * Math.cos(φ2),
-//     Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ)
-//   ); // θ in radians
-//   let direction = (θ * 180) / Math.PI; // degrees
-//   if (direction < 0) {
-//     direction += 360;
+//   // Adjust for negative angles
+//   if (diff < -180) {
+//     diff += 360;
+//   } else if (diff > 180) {
+//     diff -= 360;
 //   }
-//   const bearing = (windDegrees - direction + 360) % 360;
-//   const beating = (bearing / 180) * Math.PI; // radians
-//   const distance = Math.acos(Math.sin(φ1) * Math.sin(φ2) + Math.cos(φ1) * Math.cos(φ2) * Math.cos(Δλ)) * R; // metres
-//   const timeToChange = distance / (Math.sin(beating) * 10); // seconds
-//   return timeToChange;
+
+//   // Calculate the time until the wind direction changes towards the user from point A
+//   var timeToChange = diff / 45; // assuming wind changes direction every 45 degrees
+
+//   // Return the time in minutes rounded to the nearest integer
+//   return Math.round(timeToChange * 60);
 // }
-
-// function secondsToTimeString(seconds) {
-//   const days = Math.floor(seconds / (24 * 60 * 60));
-//   const hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
-//   const minutes = Math.floor((seconds % (60 * 60)) / 60);
-//   const secondsLeft = seconds % 60;
-//   let timeString = '';
-//   if (days > 0) {
-//     timeString += `${days} day${days > 1 ? 's' : ''}, `;
-//   }
-//   if (hours > 0) {
-//     timeString += `${hours} hour${hours > 1 ? 's' : ''}, `;
-//   }
-//   if (minutes > 0) {
-//     timeString += `${minutes} minute${minutes > 1 ? 's' : ''}, `;
-//   }
-//   timeString += `${secondsLeft} second${secondsLeft > 1 ? 's' : ''}`;
-//   return timeString;
-// }
-
-// function updateTimer(timeString) {
-//   const timerElement = document.getElementById('timer');
-//   timerElement.textContent = `Time to change: ${timeString}`;
-// }
-
-
-
-
-
-
-
-
-
-

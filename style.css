@@ -43,12 +43,20 @@ body {
 
 .current-location {
   display: grid;
-  justify-content: center;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(2, 1fr);
   padding-bottom: 5%;
+  margin-bottom: -15%;
+}
+
+#current-location-id {
+  display: flex;
+  align-self: center;
+  max-width: fit-content;
 }
 
 .location-name {
-  border: 1px solid rgb(255, 255, 255, 0.5);
+  /* border: 1px solid rgb(255, 255, 255, 0.5); */
   border-radius: 30px;
   padding: 5px 15px 5px 15px; 
   border: 2px solid rgb(0, 255, 21);
@@ -56,11 +64,12 @@ body {
 
 .header-icon {
   display: grid;
-  justify-content: center;
-  justify-self: center;
-  /* background-color: tomato; */
-  margin-top: 20%;
-  margin-bottom: -30%;
+  /* justify-content: right; */
+  justify-self: right;
+  border-radius: 50%;
+  padding: 7px; 
+  border: 2px solid rgb(0, 255, 247);
+  box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
 }
 
 .map-div {
@@ -138,12 +147,15 @@ body {
 @keyframes pulse {
   0% {
     border: 2px solid rgb(0, 255, 21);
+    box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
   }
   75% {
     border: 2px solid rgb(0, 255, 21, 0.3);
+    box-shadow: 5px 2px 10px rgb(0, 0, 0, 0.2) ;
   }
   100% {
     border: 2px solid rgb(0, 255, 21);
+    box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
   }
 }
 
@@ -217,7 +229,7 @@ body {
 .icon-header {
   display: grid;
   width: 100%;
-  justify-content: center;
+  /* justify-content: left; */
   margin-bottom: 10%;
   margin-top: -5%;
 }
