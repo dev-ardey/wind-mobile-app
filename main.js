@@ -1,5 +1,25 @@
 // npm run dev in terminal to run this application in browser
 
+
+// delaying request rate with 2 seconds to prevent API block
+function makeAPIRequest() {
+  // make API request with API key
+  fetch('https://api.openweathermap.org/data/2.5/weather?lat=52.4831765&lon=4.5729285&appid=97d43aa82bbe2a80042bef503d4d9a34')
+    .then(response => response.json())
+    .then(data => {
+      // handle API response data
+    })
+    .catch(error => console.error(error));
+
+  // add delay before making the next request
+  setTimeout(() => {
+    makeAPIRequest();
+  }, 2000); // delay of 2 seconds
+}
+
+// call the function to start making API requests
+makeAPIRequest();
+
 // import css style file
 import "./style.css";
 import { getWeather } from "./wind";
@@ -71,6 +91,9 @@ function arrowColor(elems) {
 //   if (elems.length == 0) return;
 //   elems.forEach(function (el) {
 //     document.getElementById("temp-map-img").src = "images/green-arrow.svg";
+//    if ((day.windDirection > 0 && day.windDirection < 40) || ((day.windDirection > 340 && day.windDirection < 360))) {
+//   arrowColor([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection)
+// }
 //   })
 // }
 
@@ -78,7 +101,19 @@ function arrowColor(elems) {
 function imageSelector(elems, windDirection) {
   if (elems.length == 0) return;
   elems.forEach(function (el) {
-    document.getElementById("temp-map-img").src = "images/green-arrow.svg";
+    // if wind is pointing to 0 deg
+    if ((hour.windDirection > 340 && hour.windDirection < 360) || ((hour.windDirection > 0 && hour.windDirection < 40))) {
+      document.getElementById("temp-map-img").src = "images/map-0.png";
+    }
+    // add all other directions
+
+    // if
+
+    // if 
+
+    // if 
+
+    // if
   })
 }
 
@@ -121,7 +156,7 @@ function renderHourlyWeather(hourly) {
   hourlySection.innerHTML = ""
 
   // new code iterate
-
+  // console.log(navigator.geolocation.getCurrentPosition)
   // new code iterate
   hourly.forEach((hour, index) => {
     const element = hourRowTemplate.content.cloneNode(true)
@@ -136,6 +171,13 @@ function renderHourlyWeather(hourly) {
     arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
 
     // testcode
+    // console.log(hour)
+    // if ("geolocation" in navigator) {
+    //   navigator.geolocation.getCurrentPosition(function (position) {}
+    // }
+
+
+
     // var windDeg = hour.windDirection;
     //     console.log(hour.windDirection)
 
@@ -144,6 +186,9 @@ function renderHourlyWeather(hourly) {
     //       document.getElementById("wind-direction").style.border = "8px solid rgb(0, 255, 21)";
     //       document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
     //     }
+
+
+
     // /testcode
 
     // verander naar Verander de if naar if wind direction from towards user
@@ -157,8 +202,9 @@ function renderHourlyWeather(hourly) {
   })
 }
 
-// console.log(fromADeg)
 
+
+// console.log(fromADeg)
 // working timer function only going -
 var fromADeg; // Define the variable outside the callback function
 if ("geolocation" in navigator) {
@@ -183,7 +229,7 @@ if ("geolocation" in navigator) {
       .then(data => {
         var windDeg = data.wind.deg;
         // console.log(data)
-        
+
         // Check if wind is blowing from A towards the current location
         if (windBlowingFrom(windDeg, fromADeg)) {
           // doX();linear-gradient
