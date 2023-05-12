@@ -155,53 +155,123 @@ function renderHourlyWeather(hourly) {
   //take hourlySection and remove given html
   hourlySection.innerHTML = ""
 
-  // new code iterate
-  // console.log(navigator.geolocation.getCurrentPosition)
-  // new code iterate
-  hourly.forEach((hour, index) => {
-    const element = hourRowTemplate.content.cloneNode(true)
-    setValue("temp", hour.temp, { parent: element })
-    // ik denk windDirection, check of werkt
-    setValue("wind", hour.windDirection, { parent: element })
-    setValue("precip", hour.precip, { parent: element })
-    setValue("day", DAY_FORMATTER.format(hour.timestamp), { parent: element })
-    setValue("time", HOUR_FORMATTER.format(hour.timestamp), { parent: element })
-    element.querySelector("[data-icon]").src = getIconUrl(hour.iconCode)
-    hourlySection.append(element)
-    arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
+  navigator.geolocation.getCurrentPosition(function (position) {
+    const lat = position.coords.latitude
+    const lon = position.coords.longitude
+    const userCurrentLocation = { lat, lon };
+    const pointTata = { lat: 52.4831765, lon: 4.5729285 };
+    console.log(lat)
+    console.log(lon)
+    console.log(userCurrentLocation)
+    console.log(pointTata)
+    console.log(pointTata)
 
-    // testcode
-    // console.log(hour)
-    // if ("geolocation" in navigator) {
-    //   navigator.geolocation.getCurrentPosition(function (position) {}
+    function bearing(lat1, lon1, lat2, lon2) {
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+
+      const y = Math.sin(dLon) * Math.cos(lat2 * Math.PI / 180);
+      const x = Math.cos(lat1 * Math.PI / 180) * Math.sin(lat2 * Math.PI / 180) - Math.sin(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.cos(dLon);
+
+      let brng = Math.atan2(y, x) * 180 / Math.PI;
+
+      if (brng < 0) {
+        brng += 360;
+      }
+
+      return brng;
+    }
+
+    // function windBlowingFrom(windDirection, fromADeg) {
+    //   // Calculate the difference between the wind direction and the direction from A to the current location
+    //   var diff = windDeg - fromADeg;
+
+    //   // Adjust for negative angles
+    //   if (diff < -180) {
+    //     diff += 360;
+    //   } else if (diff > 180) {
+    //     diff -= 360;
+    //   }
+
+    //   // Check if the difference is between -90 and 90 degrees
+    //   return (diff >= -90 && diff <= 90);
     // }
 
 
-
-    // var windDeg = hour.windDirection;
-    //     console.log(hour.windDirection)
-
-
-    //     if (windBlowingFrom(windDeg, fromADeg)) {
-    //       document.getElementById("wind-direction").style.border = "8px solid rgb(0, 255, 21)";
-    //       document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
-    //     }
+    const windFromTata = bearing(pointTata.lat, pointTata.lon, userCurrentLocation.lat, userCurrentLocation.lon);
+    console.log(windFromTata)
 
 
+    hourly.forEach((hour, index) => {
+      const element = hourRowTemplate.content.cloneNode(true)
+      setValue("temp", hour.temp, { parent: element })
+      setValue("wind", hour.windDirection, { parent: element })
+      setValue("precip", hour.precip, { parent: element })
+      setValue("day", DAY_FORMATTER.format(hour.timestamp), { parent: element })
+      setValue("time", HOUR_FORMATTER.format(hour.timestamp), { parent: element })
+      element.querySelector("[data-icon]").src = getIconUrl(hour.iconCode)
+      hourlySection.append(element)
+      arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
+      // console.log(hour.windDirection)
+      const newWindDirection = hour.windDirection
+      function windBlowingFrom(newWindDirection, userCurrentLocation) {
+        // Calculate the difference between the wind direction and the direction from Tata to the current location
+        var diff = newWindDirection - userCurrentLocation;
 
-    // /testcode
+        // Adjust for negative angles
+        if (diff < -180) {
+          diff += 360;
+        } else if (diff > 180) {
+          diff -= 360;
+        }
 
-    // verander naar Verander de if naar if wind direction from towards user
-    // versimpeld om te testen
-    // console.log(hour.windDirection)
-    if ((hour.windDirection > 0 && hour.windDirection < 40) || ((hour.windDirection > 300 && hour.windDirection < 360))) {
-      // green-arrow-hour-id
-      // document.getElementById("green-arrow-hour-id").style.background = "red";
-      arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
-    }
+        // Check if the difference is between -90 and 90 degrees
+        return (diff >= -90 && diff <= 90);
+      }
+      // console.log(windFromTata)
+
+      // console.log(newWindDirection)
+      // if (windBlowingFrom(newWindDirection, windFromTata)) {
+      //   document.getElementById("green-arrow-hour-id").src = "images/green-arrow.svg";
+      // } else {
+      //   document.getElementById("green-arrow-hour-id").src = "images/red-arrow.svg";
+      // }
+
+      // console.log(userCurrentLocation)
+      // const bearingFromWindToUser = windBlowingFrom(newWindDirection, userCurrentLocation);
+      // console.log(bearingFromWindToUser)
+      // if (Math.abs(bearing - windBlowingFrom) <= 180) {
+      //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+      // }
+      // (windFromTata + 20)
+      console.log(newWindDirection + 104)
+      console.log(Math.round(windFromTata))
+      // const calculatedDirection = (newWindDirection +169) == (Math.round(windFromTata));
+      // test calculatedDirection by looking at a deg in hour. Then windFromTata - that deg. and add it to newWindDirection
+      // for example a deg in hour is 32deg.  windFromTata(201) - 32 = 169. now (newWindDirection + 104)
+      const calculatedDirection = (newWindDirection) == (Math.round(windFromTata));
+
+
+      if (calculatedDirection == true) {
+        arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+      }
+
+
+      // if ((hour.windDirection > 0 && hour.windDirection < 40) || ((hour.windDirection > 300 && hour.windDirection < 360))) {
+      //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
+      // }
+
+      // if (( (hour.windDirection +20 && hour.windDirection -20 THIS RANGE windDirection + and - 20) == windFromTata)) {
+      //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
+      // }
+      // console.log(userCurrentLocation)
+      // const bearingFromWindToUser = calculateBearing(hour.windDirection, userCurrentLocation);
+      // // console.log(bearingFromWindToUser)
+      // if (Math.abs(bearing - bearingFromWindToUser) <= 180) {
+      //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+      // }
+    })
   })
 }
-
 
 
 // console.log(fromADeg)
@@ -244,7 +314,6 @@ if ("geolocation" in navigator) {
           document.getElementById("green-arrow-id").src = "images/red-arrow.svg";
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is blowing towards your location";
           // console.log(fromADeg)
-          return fromADeg
           // Calculate the time until the wind direction changes towards the user from point A
           // var timeToChange = calculateTimeToChange(windDeg, fromADeg);
           // updateTimer(timeToChange * 60); 
