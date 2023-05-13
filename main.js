@@ -136,13 +136,11 @@ function renderDailyWeather(daily) {
     dailySection.append(element)
     arrowRotate([document.querySelectorAll('.green-arrow-day')[index]], (day.windDirection))
 
-    // verander naar Verander de if naar if wind direction from towards user
-    // versimpeld om te testen samen met de console log
-    // console.log(day.windDirection)
+
+    //werkende daily hardcoded
     if ((day.windDirection > 0 && day.windDirection < 40) || ((day.windDirection > 340 && day.windDirection < 360))) {
-      // green-arrow-hour-id
-      // document.getElementById("green-arrow-hour-id").style.background = "red";
-      arrowColor([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection)
+      // comented out tot hour goed is
+      // arrowColor([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection)
     }
 
   })
@@ -181,24 +179,10 @@ function renderHourlyWeather(hourly) {
       return brng;
     }
 
-    // function windBlowingFrom(windDirection, fromADeg) {
-    //   // Calculate the difference between the wind direction and the direction from A to the current location
-    //   var diff = windDeg - fromADeg;
-
-    //   // Adjust for negative angles
-    //   if (diff < -180) {
-    //     diff += 360;
-    //   } else if (diff > 180) {
-    //     diff -= 360;
-    //   }
-
-    //   // Check if the difference is between -90 and 90 degrees
-    //   return (diff >= -90 && diff <= 90);
-    // }
 
 
     const windFromTata = bearing(pointTata.lat, pointTata.lon, userCurrentLocation.lat, userCurrentLocation.lon);
-    console.log(windFromTata)
+    console.log("the wind from tata is " + windFromTata)
 
 
     hourly.forEach((hour, index) => {
@@ -213,58 +197,243 @@ function renderHourlyWeather(hourly) {
       arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
       // console.log(hour.windDirection)
       const newWindDirection = hour.windDirection
-      function windBlowingFrom(newWindDirection, userCurrentLocation) {
-        // Calculate the difference between the wind direction and the direction from Tata to the current location
-        var diff = newWindDirection - userCurrentLocation;
+      // change it so this function that creates a beating instead of deg
+      // function windBlowingFrom(newWindDirection, userCurrentLocation) {
+      //   // Calculate the difference between the wind direction and the direction from Tata to the current location
+      //   var diff = newWindDirection - userCurrentLocation;
 
-        // Adjust for negative angles
-        if (diff < -180) {
-          diff += 360;
-        } else if (diff > 180) {
-          diff -= 360;
-        }
+      //   // Adjust for negative angles
+      //   if (diff < -180) {
+      //     diff += 360;
+      //   } else if (diff > 180) {
+      //     diff -= 360;
+      //   }
 
-        // Check if the difference is between -90 and 90 degrees
-        return (diff >= -90 && diff <= 90);
-      }
+      //   // Check if the difference is between -90 and 90 degrees
+      //   return (diff >= -90 && diff <= 90);
+      // }
+
       // console.log(windFromTata)
-
       // console.log(newWindDirection)
-      // if (windBlowingFrom(newWindDirection, windFromTata)) {
-      //   document.getElementById("green-arrow-hour-id").src = "images/green-arrow.svg";
-      // } else {
-      //   document.getElementById("green-arrow-hour-id").src = "images/red-arrow.svg";
-      // }
-
-      // console.log(userCurrentLocation)
-      // const bearingFromWindToUser = windBlowingFrom(newWindDirection, userCurrentLocation);
-      // console.log(bearingFromWindToUser)
-      // if (Math.abs(bearing - windBlowingFrom) <= 180) {
-      //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
-      // }
-      // (windFromTata + 20)
-      console.log(newWindDirection + 104)
-      console.log(Math.round(windFromTata))
+      // console.log(Math.round(windFromTata))
       // const calculatedDirection = (newWindDirection +169) == (Math.round(windFromTata));
       // test calculatedDirection by looking at a deg in hour. Then windFromTata - that deg. and add it to newWindDirection
       // for example a deg in hour is 32deg.  windFromTata(201) - 32 = 169. now (newWindDirection + 104)
-      const calculatedDirection = (newWindDirection) == (Math.round(windFromTata));
+      const calculatedDirection = (newWindDirection + 79) == (Math.round(windFromTata));
+
+      // see if i can create 
+      // const tataWindRange = (windFrom Tata - 20deg || windFrom Tata + 20deg) 
+      // const calculatedBearingDirection = (newWindDirection is inside tataWindRange);
+      // if (calculatedBearingDirection == true) {
+      //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+      // }
 
 
-      if (calculatedDirection == true) {
+
+
+      //rangeFunction sort of works
+
+
+      // rangeFunction
+      // function rangeFunction() {
+      //   const tataWind = Math.round(windFromTata);
+      //   // adding degrees to a total of 40deg
+      //   const tataWindHigh = ((tataWind) + 20);
+      //   const tataWindLow =  ((tataWind) - 20);
+      //   const controleNum1 = 136;
+      //   const controleNum2 = 115;
+      //   const finalNum = newWindDirection;
+      //   console.log(newWindDirection)
+      //   // console.log(tataWind)
+
+
+
+      //   const result1 = (controleNum1 >= tataWindLow && controleNum1 <= tataWindHigh);
+      //   const result2 = (controleNum2 >= tataWindLow && controleNum2 <= tataWindHigh);
+      //   const finalResult = (finalNum >= tataWindLow && finalNum <= tataWindHigh);
+      //   // console.log(finalResult)
+      //   // finalResult ? console.log("true") : console.log("false")
+
+      //   // console.log(result1 ? "true" : "false");
+      //   // console.log(result2 ? "true" : "false");
+      //   // console.log(finalResult ? "true" : "false");
+      //   if (finalResult == true) {
+      //     arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+
+      //   }
+
+      // }
+      // rangeFunction();
+
+
+
+
+      // improved version of the rangeFunction (simpeler + shorter)
+
+
+      //       function calculateWindDirectionRange(windFromTata) {
+      //         //windFromTata flipped 180 so that 
+      //         const tataWind = Math.round(windFromTata +180);
+      //         const tataWindHigh = tataWind + 120;
+      //         const tataWindLow = tataWind - 120;
+      //         // maby the problem is that this calculation is based on normal math, not on math with 360 as a max?
+      //         //if tatawindHigh higer than 360. start with 0 and add the rest
+      //         //if tataWindLow lower than 0. start with 360 and subtracs the rest
+
+      //         return { min: tataWindLow, max: tataWindHigh };
+      //       }
+
+      //       const windDirectionRange = calculateWindDirectionRange(windFromTata);
+      // // const newWindDirection = 150; // example wind direction value
+
+      // if (newWindDirection >= windDirectionRange.min && newWindDirection <= windDirectionRange.max) {
+      //   // The wind direction is within the valid range
+      //           arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+      //     } else {
+      //   // The wind direction is outside the valid range
+      //   console.log('Wind direction is outside the valid range');
+      // }
+
+
+
+
+
+      // rangeFunction with modulo operator almost working
+
+      // function rangeFunction() {
+      //   const tataWind = Math.round(windFromTata);
+      //   // adding degrees to a total of 40deg
+      //   let tataWindHigh = (windFromTata + 40) % 360;
+      //   let tataWindLow = (windFromTata - 40 + 360) % 360;
+
+      //   if (tataWindHigh < tataWindLow) {
+      //     const tataWindHigh1 = 360;
+      //     const tataWindLow1 = tataWindLow;
+      //     tataWindLow = 0;
+      //     const range1 = [tataWindLow1, 360];
+      //     const range2 = [0, tataWindHigh];
+      //     // console.log("Range: ", range1, range2);
+      //   } else {
+      //     const range = [tataWindLow, tataWindHigh];
+      //     // console.log("Range: ", range);
+      //   }
+
+      //   // zojuist deze code gepaste, check of het werkt en of het werkt samen met eigen code
+      //   console.log(windFromTata)
+      //   const tataWindBearing = (90 - windFromTata) % 360;
+      //   // console.log(tataWindBearing)
+
+
+      //   const controleNum1 = 136;
+      //   const controleNum2 = 115;
+      //   const finalNum = newWindDirection;
+      //   // console.log(newWindDirection)
+
+      //   // Check if tataWindHigh is greater than or equal to 360
+      //   if (tataWindHigh >= 360) {
+      //     tataWindHigh = tataWindHigh % 360;
+      //   }
+
+      //   // Check if tataWindLow is less than 0
+      //   if (tataWindLow < 0) {
+      //     tataWindLow = 360 + (tataWindLow % 360);
+      //   }
+
+      //   const result1 = (controleNum1 >= tataWindLow && controleNum1 <= tataWindHigh);
+      //   const result2 = (controleNum2 >= tataWindLow && controleNum2 <= tataWindHigh);
+      //   const finalResult = (finalNum >= tataWindLow && finalNum <= tataWindHigh);
+
+      //   if (finalResult == true) {
+      //     arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+      //   }
+      // }
+      // rangeFunction();
+
+
+
+
+
+      // implementing current code with hour variables
+
+      console.log(windFromTata)
+      // console.log(newWindDirection)
+
+      function hourWindBlowingFrom(newWindDirection, windFromTata) {
+        // Calculate the difference between the wind direction and the direction from A to the current location
+        var diffTata = newWindDirection - (windFromTata + 180);
+        // console.log(newWindDirection)
+
+        // Adjust for negative angles
+        if (diffTata < -180) {
+          diffTata += 360;
+        } else if (diffTata > 180) {
+          diffTata -= 360;
+        }
+
+        // Check if the difference is between -90 and 90 degrees
+        return (diffTata >= -22.5 && diffTata <= 22.5);
+      }
+
+      if (hourWindBlowingFrom(newWindDirection, windFromTata)) {
+        // console.log("hourly arrows should be green ")
         arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+
+      }
+      else {
+        // console.log("hourly arrows should be red ")
       }
 
 
+
+      // code versimpelen
+
+
+      // tijdelijk uitgezet,
+      // console.log(newWindDirection) r242
+      // console.log(tataWind)  r243
+      // console.log(finalResult) r250
+      // voordat ik die weer aanzet om pijltjes te testen. TEST EERST CURRENT LOCATION, die moet mee veranderen met de browser
+      // de geolocations moeten verandern.
+      // console.log(userCurrentLocation)
+      // no override      52.4588487, lon: 4.6108897
+      // ijmuiden strand  52.455214, lon: 4.555571
+      // heemskerk        52.509466, lon: 4.677003
+      // dat betekend dat de coordinaten het doen.
+
+      // console log tatawind = 67
+
+
+
+
+      // if (calculatedDirection == true) {
+      //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
+      // }
+
+
+      // // rangeFunction
+      // function rangeFunction() {
+      //   const testNum = 136;
+      //   const numHigh = testNum + 20;
+      //   const numLow = testNum - 20;
+      //   const controleNum1 = 136;
+      //   const controleNum2 = 115;
+
+      //   const result1 = (controleNum1 >= numLow && controleNum1 <= numHigh);
+      //   const result2 = (controleNum2 >= numLow && controleNum2 <= numHigh);
+
+      //   console.log(result1 ? "true" : "false");
+      //   console.log(result2 ? "true" : "false");
+      // }
+      // rangeFunction();
+
+
+
+      // old if code to test if hour arrows work
       // if ((hour.windDirection > 0 && hour.windDirection < 40) || ((hour.windDirection > 300 && hour.windDirection < 360))) {
       //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
       // }
 
-      // if (( (hour.windDirection +20 && hour.windDirection -20 THIS RANGE windDirection + and - 20) == windFromTata)) {
-      //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
-      // }
-      // console.log(userCurrentLocation)
-      // const bearingFromWindToUser = calculateBearing(hour.windDirection, userCurrentLocation);
+      // not working bearing code but maby i can use it to get a range instead of 1 deg
       // // console.log(bearingFromWindToUser)
       // if (Math.abs(bearing - bearingFromWindToUser) <= 180) {
       //   arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
@@ -304,16 +473,17 @@ if ("geolocation" in navigator) {
         if (windBlowingFrom(windDeg, fromADeg)) {
           // doX();linear-gradient
           // call function to do X
+          // console.log("current arrow should be green ")
           // document.getElementById("wind-direction").style.background = "linear-gradient( rgb(39, 255, 208), rgb(0, 255, 21))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(0, 255, 21)";
           document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is not blowing towards your location";
         } else {
+          // console.log("current arrow should be red ")
           // document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(255, 112, 119)";
           document.getElementById("green-arrow-id").src = "images/red-arrow.svg";
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is blowing towards your location";
-          // console.log(fromADeg)
           // Calculate the time until the wind direction changes towards the user from point A
           // var timeToChange = calculateTimeToChange(windDeg, fromADeg);
           // updateTimer(timeToChange * 60); 
@@ -367,7 +537,7 @@ function calculateBearing(lat1, lon1, lat2, lon2) {
 
   // Convert bearing to degrees
   var bearing = rad2deg(bearingRad);
-
+  // console.log(bearing)
   return bearing;
 }
 
@@ -378,10 +548,10 @@ function deg2rad(degrees) {
 function rad2deg(radians) {
   return radians * (180 / Math.PI);
 }
-
 function windBlowingFrom(windDeg, fromADeg) {
   // Calculate the difference between the wind direction and the direction from A to the current location
   var diff = windDeg - fromADeg;
+  console.log(windDeg)
 
   // Adjust for negative angles
   if (diff < -180) {
