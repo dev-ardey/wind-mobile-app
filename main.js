@@ -261,6 +261,7 @@ function renderDailyWeather(daily) {
 
 
 
+const expectedChanges = []
 
 const HOUR_FORMATTER = Intl.DateTimeFormat(undefined, { hour: "numeric" })
 const hourlySection = document.querySelector("[data-hour-section]")
@@ -337,10 +338,15 @@ function renderHourlyWeather(hourly) {
       }
 
       if (hourWindBlowingFrom(newWindDirection, windFromTata)) {
+        expectedChanges.push(index + 1)
 
         // console.log("hourly arrows should be green ")
         arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
 
+      }
+
+      if (index === hourly.length - 1) {
+        console.log({ expectedChanges })
       }
 
     })
