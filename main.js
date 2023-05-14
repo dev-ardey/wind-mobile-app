@@ -1,10 +1,18 @@
 // npm run dev in terminal to run this application in browser
 
+const coordintes = {
+  default: {
+    lat: 52.4831765, lon: 4.5729285
+  },
+  tata_steel: {
+    lat: 52.478089, lon: 4.592505
+  }
+}
 
 // delaying request rate with 2 seconds to prevent API block
 function makeAPIRequest() {
   // make API request with API key
-  fetch('https://api.openweathermap.org/data/2.5/weather?lat=52.4831765&lon=4.5729285&appid=97d43aa82bbe2a80042bef503d4d9a34')
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordintes.tata_steel.lat}&lon=${coordintes.tata_steel.lon}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
     .then(response => response.json())
     .then(data => {
       // handle API response data
@@ -32,8 +40,8 @@ function positionSucces({ coords }) {
     coords.latitude,
     coords.longitude,
     Intl.DateTimeFormat().resolvedOptions().timeZone).then(renderWeather).catch(e => {
-      // console.log(e)
-      alert("Error getting weather information.")
+      console.log(e)
+      // alert("Error getting weather information. " + error.message)
     })
 }
 
@@ -67,7 +75,7 @@ function renderCurrentWeather(current) {
   setValue("current-wind", current.windDirection)
   setValue("current-precip", current.precip)
   // maby i can use something like this to rotate green-arrow-id?
-  // arrowRotate([document.querySelectorAll('.green-arrow-id')], (current.windDirection))
+  arrowRotate(document.querySelectorAll('.green-arrow-current'), current.windDirection)
   // console.log(current.windDirection)
 
 }
@@ -167,7 +175,7 @@ function renderDailyWeather(daily) {
     const lat = position.coords.latitude
     const lon = position.coords.longitude
     const userCurrentLocation = { lat, lon };
-    const pointTata = { lat: 52.4831765, lon: 4.5729285 };
+    const pointTata = { ...coordintes.tata_steel };
     console.log("daily lat : " + lat)
     console.log("daily lon : " + lon)
     console.log(userCurrentLocation)
@@ -265,7 +273,7 @@ function renderHourlyWeather(hourly) {
     const lat = position.coords.latitude
     const lon = position.coords.longitude
     const userCurrentLocation = { lat, lon };
-    const pointTata = { lat: 52.4831765, lon: 4.5729285 };
+    const pointTata = { ...coordintes.tata_steel };
     console.log("hourly lat : " + lat)
     console.log("hourly lat : " + lon)
     console.log(userCurrentLocation)
@@ -302,8 +310,10 @@ function renderHourlyWeather(hourly) {
       setValue("precip", hour.precip, { parent: element })
       setValue("day", DAY_FORMATTER.format(hour.timestamp), { parent: element })
       setValue("time", HOUR_FORMATTER.format(hour.timestamp), { parent: element })
+
       element.querySelector("[data-icon]").src = getIconUrl(hour.iconCode)
       hourlySection.append(element)
+
       arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
       const newWindDirection = hour.windDirection
       console.log(windFromTata)
@@ -314,7 +324,7 @@ function renderHourlyWeather(hourly) {
         // Calculate the difference between the wind direction and the direction from A to the current location
         var diffTata = newWindDirection - (windFromTata + 180);
         // console.log(newWindDirection)
-
+        // console.log(index, diffTata, newWindDirection, windFromTata)
         // Adjust for negative angles
         if (diffTata < -180) {
           diffTata += 360;
@@ -327,6 +337,7 @@ function renderHourlyWeather(hourly) {
       }
 
       if (hourWindBlowingFrom(newWindDirection, windFromTata)) {
+
         // console.log("hourly arrows should be green ")
         arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
 
@@ -347,7 +358,7 @@ if ("geolocation" in navigator) {
     // console.log(position) // only gives long and lat
 
     // Calculate the bearing between the current location and A
-    var bearing = calculateBearing(lat, lon, 52.4831765, 4.5729285);
+    var bearing = calculateBearing(lat, lon, coordintes.tata_steel.lat, coordintes.tata_steel.lon);
 
     // Calculate the opposite direction of the bearing to get the direction from A to the current location
     var fromADeg = (bearing + 180) % 360;
@@ -357,7 +368,7 @@ if ("geolocation" in navigator) {
 
     // data api changing function
     // Get wind direction data from an API
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${52.4831765}&lon=${4.5729285}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordintes.tata_steel.lat}&lon=${coordintes.tata_steel.lon}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
       .then(response => response.json())
       .then(data => {
         var windDeg = data.wind.deg;

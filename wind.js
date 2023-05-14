@@ -1,6 +1,7 @@
 import axios from "axios"
 
 export function getWeather(lat, lon, timezone) {
+    console.log("party location = " + lat)
     return axios
         .get(
             "https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,precipitation,weathercode,winddirection_10m,winddirection_80m,winddirection_120m,winddirection_180m,windgusts_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,winddirection_10m_dominant&current_weather=true&timeformat=unixtime",
@@ -181,6 +182,9 @@ function parseHourlyWeather({ hourly, current_weather }) {
             // filter for current hour if its >= than current time.
             // so that this timestamp always returns the current hour
         }).filter(({ timestamp }) => timestamp >= current_weather.time * 1000)
+    // .filter(({ timestamp }) =>
+    //     [9, 10, 11, 12, 13, 14].includes(new Date(timestamp).getHours()) && [4].includes(new Date(timestamp).getDay())
+    // )
 }
 // lat = lattitude
 // lon = longitude
