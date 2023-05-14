@@ -5,4 +5,5 @@ red arrows working in day and hour
 
 improved ux readability 
 
-hourly function is working on location of user
+hourly and daily function is working on location of user
+

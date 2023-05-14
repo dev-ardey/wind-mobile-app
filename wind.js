@@ -11,7 +11,7 @@ export function getWeather(lat, lon, timezone) {
                     timezone,
                 }
             })
-            
+
         .then(({ data }) => {
             // exampleof parse daily time.map
             // return data
