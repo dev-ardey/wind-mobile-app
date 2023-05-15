@@ -264,6 +264,7 @@ function renderDailyWeather(daily) {
 
 
 const expectedChanges = []
+const expectedGreenChanges = []
 
 const HOUR_FORMATTER = Intl.DateTimeFormat(undefined, { hour: "numeric" })
 const hourlySection = document.querySelector("[data-hour-section]")
@@ -342,6 +343,7 @@ function renderHourlyWeather(hourly) {
       if (hourWindBlowingFrom(newWindDirection, windFromTata)) {
         //expectedChanges cathes i
         expectedChanges.push(index + 1)
+        expectedGreenChanges.push(index + 1)
 
         // console.log("hourly arrows should be green ")
         arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
@@ -352,13 +354,40 @@ function renderHourlyWeather(hourly) {
       if (index === hourly.length - 1) {
         // use expectedChanges  i for X
         console.log({ expectedChanges })
+        console.log({ expectedGreenChanges })
+
         // (expectedChanges[0] -1) is minus current hour
-        if ((expectedChanges[0] -1) == true ){
-        document.getElementById("hours-until-change-id").innerHTML = (expectedChanges[0] -1) + " hour";
+        const calculatedExpectedRedChange = (expectedChanges[0] - 1)
+        // if expectedChanges is 1 it should say hour.
+        if (expectedChanges == 1) {
+          document.getElementById("wind-direction-in-hours").innerHTML = "Time until poluted air"
+          document.getElementById("hours-until-change-id").innerHTML = calculatedExpectedRedChange + " hour";
         }
+        // else expectedChanges should say hours.
         else {
-          document.getElementById("hours-until-change-id").innerHTML = (expectedChanges[0] -1) + " hours";
+          document.getElementById("wind-direction-in-hours").innerHTML = "Time until poluted air"
+          document.getElementById("hours-until-change-id").innerHTML = calculatedExpectedRedChange + " hours";
+        }
+
+
+
+        // if first hourly arrow(s) are red this function calculates when they will change to green
+        function countConsecutiveNumbers(array) {
+          let count = 0;
+          for (let i = 0; i < array.length - 2; i++) {
+            if (array[i + 1] - array[i] > 1) {
+              break;
+            }
+            count++;
           }
+          return count;
+        }
+        const consecutiveCount = (countConsecutiveNumbers(expectedGreenChanges) + 1);
+        // console.log("Consecutive Numbers Count:", consecutiveCount);
+        if (calculatedExpectedRedChange == 0) {
+          document.getElementById("wind-direction-in-hours").innerHTML = "Time until clean air"
+          document.getElementById("hours-until-change-id").innerHTML = consecutiveCount + " hours"
+        }
       }
 
     })

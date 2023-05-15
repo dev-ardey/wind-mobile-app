@@ -11,19 +11,28 @@
   <!-- blurred within body : class="blurred" for loading without info later -->
 
   <header class="header">
-    <!-- <div id="countdown-timer">wind calc</div> -->
-    <div class="current-location"><span class="label, location-name" id="current-location-id">LIVE LOCATION</span>
-      <img class="weather-icon large, icon-header, header-icon" src="icons/sun.png" data-current-icon>
-    </div>
+      <!-- <div id="countdown-timer">wind calc</div> -->
+      <div class="current-location"><span class="label, location-name" id="current-location-id">LIVE LOCATION</span>
+        <img class="weather-icon large, icon-header, header-icon" src="icons/sun.png" data-current-icon>
+      </div>
     <div class="map-div">
       <div class="map-with-location">
         <img src="images/map-no-data.png" id="temp-map-img">
       </div>
     </div>
     <!-- temporary wind sign -->
-    <div class="info-group" id="temp-id">
-      <div class="label">Temp</div>
-      <div><span data-current-temp="">9</span><span class="value-sub-info">&deg;</span></div>
+    <div class="inline-div">
+      <div class="info-group" id="temp-id">
+        <div class="label">Temp</div>
+        <div><span data-current-temp="">9</span><span class="value-sub-info">&deg;</span></div>
+      </div>
+      <div class="info-group" id="shield-id">
+        <div id="air-shield-text">AirShield</div>
+        <div><span class="value-shield"></span>
+          <!-- header-icon class removed , circle removed -->
+          <img class="weather-icon large, icon-header, shield-icon" src="images/clear-shield.svg">
+        </div>
+      </div>
     </div>
     <div class="border"></div>
     <div class="header-top">
@@ -48,7 +57,7 @@
         <div><span data-current-low="">32</span>&deg;C</div>
       </div>
       <div class="info-group">
-        <div class="label">wind direction changes in</div>
+        <div class="label" id="wind-direction-in-hours">wind direction changes in</div>
         <div><span id="hours-until-change-id">0</span></div>
       </div>
       <!-- hidden -->
