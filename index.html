@@ -21,7 +21,11 @@
       </div>
     </div>
     <!-- temporary wind sign -->
-    <div class="label">Wind</div>
+    <div class="info-group" id="temp-id">
+      <div class="label">Temp</div>
+      <div><span data-current-temp="">9</span><span class="value-sub-info">&deg;</span></div>
+    </div>
+    <div class="border"></div>
     <div class="header-top">
       <div class="header-current-wind">
         <!-- hidden data current wind class, only for development -->
@@ -35,17 +39,17 @@
       <div id="wind-direction">N</div>
     </div>
     <div class="header-bottom">
-      <div class="info-group">
+      <div class="info-group, hidden">
         <div class="label">High</div>
         <div><span data-current-high="">32</span>&deg;C</div>
       </div>
-      <div class="info-group">
+      <div class="info-group, hidden">
         <div class="label">Low</div>
         <div><span data-current-low="">32</span>&deg;C</div>
       </div>
       <div class="info-group">
-        <div class="label">Temp</div>
-        <div><span data-current-temp="">9</span><span class="value-sub-info">&deg;</span></div>
+        <div class="label">wind direction changes in</div>
+        <div><span id="hours-until-change-id">0</span></div>
       </div>
       <!-- hidden -->
       <div class="info-group, hidden">
@@ -288,7 +292,7 @@
       </td>
       <td>
         <!-- hidden -->
-        <div class="info-group , hidden">
+        <div class=", hidden">
           <div class="label">Precip</div>
           <div><span data-precip></span><span class="value-sub-info">mm</span></div>
         </div>

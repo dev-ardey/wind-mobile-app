@@ -352,6 +352,13 @@ function renderHourlyWeather(hourly) {
       if (index === hourly.length - 1) {
         // use expectedChanges  i for X
         console.log({ expectedChanges })
+        // (expectedChanges[0] -1) is minus current hour
+        if ((expectedChanges[0] -1) == true ){
+        document.getElementById("hours-until-change-id").innerHTML = (expectedChanges[0] -1) + " hour";
+        }
+        else {
+          document.getElementById("hours-until-change-id").innerHTML = (expectedChanges[0] -1) + " hours";
+          }
       }
 
     })
@@ -500,3 +507,4 @@ function windBlowingFrom(windDeg, fromADeg) {
 //   // Return the time in minutes rounded to the nearest integer
 //   return Math.round(timeToChange * 60);
 // }
+
