@@ -1,6 +1,7 @@
 // npm run dev in terminal to run this application in browser
 
 const coordintes = {
+  //default is old incorrect location
   default: {
     lat: 52.4831765, lon: 4.5729285
   },
@@ -76,6 +77,7 @@ function renderCurrentWeather(current) {
   setValue("current-precip", current.precip)
   // maby i can use something like this to rotate green-arrow-id?
   arrowRotate(document.querySelectorAll('.green-arrow-current'), current.windDirection)
+  //  arrowColor(document.querySelectorAll('.green-arrow-current'), current.windDirection)
   // console.log(current.windDirection)
 
 }
@@ -176,10 +178,10 @@ function renderDailyWeather(daily) {
     const lon = position.coords.longitude
     const userCurrentLocation = { lat, lon };
     const pointTata = { ...coordintes.tata_steel };
-    console.log("daily lat : " + lat)
-    console.log("daily lon : " + lon)
-    console.log(userCurrentLocation)
-    console.log(pointTata)
+    // console.log("daily lat : " + lat)
+    // console.log("daily lon : " + lon)
+    // console.log(userCurrentLocation)
+    // console.log(pointTata)
 
     function bearing(lat1, lon1, lat2, lon2) {
       const dLon = (lon2 - lon1) * Math.PI / 180;
@@ -199,7 +201,7 @@ function renderDailyWeather(daily) {
 
 
     const windFromTata = bearing(pointTata.lat, pointTata.lon, userCurrentLocation.lat, userCurrentLocation.lon);
-    console.log("the wind from tata is " + windFromTata)
+    // console.log("the wind from tata is " + windFromTata)
 
     daily.forEach((day, index) => {
       const element = dayCardTemplate.content.cloneNode(true)
@@ -209,14 +211,14 @@ function renderDailyWeather(daily) {
       dailySection.append(element)
       arrowRotate([document.querySelectorAll('.green-arrow-day')[index]], (day.windDirection))
       const newWindDirection = day.windDirection
-      console.log(windFromTata)
+      // console.log(windFromTata)
       // console.log(newWindDirection)
 
       // wind blowing from tata to user function
       function dayWindBlowingFrom(newWindDirection, windFromTata) {
         // Calculate the difference between the wind direction and the direction from A to the current location
         var diffTata = newWindDirection - (windFromTata + 180);
-        console.log("newest wind from tata is " + windFromTata)
+        // console.log("newest wind from tata is " + windFromTata)
         // console.log(newWindDirection)
         // Adjust for negative angles
         if (diffTata < -180) {
@@ -275,10 +277,10 @@ function renderHourlyWeather(hourly) {
     const lon = position.coords.longitude
     const userCurrentLocation = { lat, lon };
     const pointTata = { ...coordintes.tata_steel };
-    console.log("hourly lat : " + lat)
-    console.log("hourly lat : " + lon)
-    console.log(userCurrentLocation)
-    console.log(pointTata)
+    // console.log("hourly lat : " + lat)
+    // console.log("hourly lat : " + lon)
+    // console.log(userCurrentLocation)
+    // console.log(pointTata)
 
     function bearing(lat1, lon1, lat2, lon2) {
       const dLon = (lon2 - lon1) * Math.PI / 180;
@@ -298,7 +300,7 @@ function renderHourlyWeather(hourly) {
 
 
     const windFromTata = bearing(pointTata.lat, pointTata.lon, userCurrentLocation.lat, userCurrentLocation.lon);
-    console.log("the wind from tata is " + windFromTata)
+    // console.log("the wind from tata is " + windFromTata)
 
 
     hourly.forEach((hour, index) => {
@@ -317,7 +319,7 @@ function renderHourlyWeather(hourly) {
 
       arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
       const newWindDirection = hour.windDirection
-      console.log(windFromTata)
+      // console.log(windFromTata)
       // console.log(newWindDirection)
 
       // wind blowing from tata to user function
@@ -338,6 +340,7 @@ function renderHourlyWeather(hourly) {
       }
 
       if (hourWindBlowingFrom(newWindDirection, windFromTata)) {
+        //expectedChanges cathes i
         expectedChanges.push(index + 1)
 
         // console.log("hourly arrows should be green ")
@@ -345,7 +348,9 @@ function renderHourlyWeather(hourly) {
 
       }
 
+      //
       if (index === hourly.length - 1) {
+        // use expectedChanges  i for X
         console.log({ expectedChanges })
       }
 
@@ -362,6 +367,8 @@ if ("geolocation" in navigator) {
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     // console.log(position) // only gives long and lat
+    // console.log("2nd api lat = " + lat)
+    // console.log("2nd api lat = " + lon)
 
     // Calculate the bearing between the current location and A
     var bearing = calculateBearing(lat, lon, coordintes.tata_steel.lat, coordintes.tata_steel.lon);
@@ -462,7 +469,7 @@ function rad2deg(radians) {
 function windBlowingFrom(windDeg, fromADeg) {
   // Calculate the difference between the wind direction and the direction from A to the current location
   var diff = windDeg - fromADeg;
-  console.log(windDeg)
+  // console.log(windDeg)
 
   // Adjust for negative angles
   if (diff < -180) {
@@ -471,8 +478,8 @@ function windBlowingFrom(windDeg, fromADeg) {
     diff -= 360;
   }
 
-  // Check if the difference is between -90 and 90 degrees
-  return (diff >= -90 && diff <= 90);
+  // Check if the difference is between -22.5 and 22.5, but bearing is flipped so 180 - 22.5 = 157.5
+  return (diff >= -157.5 && diff <= 157.5);
 }
 
 

@@ -1,7 +1,8 @@
 import axios from "axios"
 
 export function getWeather(lat, lon, timezone) {
-    console.log("party location = " + lat)
+    // console.log("1st api lat = " + lat)
+    // console.log("1st api lat = " + lon)
     return axios
         .get(
             "https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,precipitation,weathercode,winddirection_10m,winddirection_80m,winddirection_120m,winddirection_180m,windgusts_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,winddirection_10m_dominant&current_weather=true&timeformat=unixtime",
