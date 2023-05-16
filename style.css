@@ -69,10 +69,21 @@ body {
   display: grid;
   /* justify-content: right; */
   justify-self: right;
-  border-radius: 50%;
-  padding: 7px; 
-  border: 2px solid rgb(0, 255, 247);
-  box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
+  position: relative;
+  left: -15px;
+  /* border-radius: 50%; */
+  /* border: 2px solid rgb(0, 255, 247); */
+  /* box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ; */
+  /* background-color: tomato; */
+}
+
+#weather-icon-id {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--white);
+  text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+  display: flex;
+  justify-self: right;
 }
 
 .map-div {
@@ -200,18 +211,18 @@ body {
     right: 200px;
     opacity: 0;
   }
-  35% {
-    opacity: 5;
+  25% {
+    opacity: 1;
   }
   50% {
-    opacity: 10;
+    opacity: 1;
   }
-  65% {
-    opacity: 5;
+  75% {
+    opacity: 1;
   }
   100% {
     position: absolute;
-    right: 50px;
+    right: 10px;
     opacity: 0;
   }
 }
@@ -227,18 +238,21 @@ body {
     opacity: 0;
     /* delay: 2s; */
   }
-  35% {
-    opacity: 5;
+  25% {
+    opacity: 1;
   }
   50% {
-    opacity: 10;
+    opacity: 1;
+    right: 100px;
+    
   }
-  65% {
-    opacity: 5;
+  75% {
+    opacity: 1;
+ 
   }
   100% {
     position: absolute;
-    right: 150px;
+    right: 100px;
     opacity: 0;
   }
 }

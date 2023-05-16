@@ -78,8 +78,32 @@ function renderCurrentWeather(current) {
   // maby i can use something like this to rotate green-arrow-id?
   arrowRotate(document.querySelectorAll('.green-arrow-current'), current.windDirection)
   //  arrowColor(document.querySelectorAll('.green-arrow-current'), current.windDirection)
-  // console.log(current.windDirection)
 
+  // change map air direction according to what the current degree is
+  if ((current.windDirection >= 337.5 || current.windDirection <= 22.5)) {
+    document.getElementById("temp-map-img").src = "images/map-180.png";
+  }
+  if ((current.windDirection >= 22.6 || current.windDirection <= 67.5)) {
+    document.getElementById("temp-map-img").src = "images/map-225.png";
+  }
+  if ((current.windDirection >= 67.6 || current.windDirection <= 112.5)) {
+    document.getElementById("temp-map-img").src = "images/map-270.png";
+  }
+  if ((current.windDirection >= 112.6 || current.windDirection <= 157, 6.5)) {
+    document.getElementById("temp-map-img").src = "images/map-315.png";
+  }
+  if ((current.windDirection >= 157.6 || current.windDirection <= 202.5)) {
+    document.getElementById("temp-map-img").src = "images/map-0.png";
+  }
+  if ((current.windDirection >= 202.6 || current.windDirection <= 247.5)) {
+    document.getElementById("temp-map-img").src = "images/map-45.png";
+  }
+  if ((current.windDirection >= 247.6 || current.windDirection <= 292.5)) {
+    document.getElementById("temp-map-img").src = "images/map-90.png";
+  }
+  if ((current.windDirection >= 292.6 || current.windDirection <= 337.5)) {
+    document.getElementById("temp-map-img").src = "images/map-135.png";
+  }
 }
 
 function arrowRotate(elems, windDirection) {
@@ -360,12 +384,12 @@ function renderHourlyWeather(hourly) {
         const calculatedExpectedRedChange = (expectedChanges[0] - 1)
         // if expectedChanges is 1 it should say hour.
         if (expectedChanges == 1) {
-          document.getElementById("wind-direction-in-hours").innerHTML = "Time until poluted air"
+          document.getElementById("wind-direction-in-hours").innerHTML = "Time until polluted air"
           document.getElementById("hours-until-change-id").innerHTML = calculatedExpectedRedChange + " hour";
         }
         // else expectedChanges should say hours.
         else {
-          document.getElementById("wind-direction-in-hours").innerHTML = "Time until poluted air"
+          document.getElementById("wind-direction-in-hours").innerHTML = "Time until polluted air"
           document.getElementById("hours-until-change-id").innerHTML = calculatedExpectedRedChange + " hours";
         }
 
@@ -391,8 +415,8 @@ function renderHourlyWeather(hourly) {
         }
         // if everything is green for a week
         if ((expectedGreenChanges && expectedChanges) == 0) {
-          document.getElementById("wind-direction-in-hours").innerHTML = "Time until clean air"
-          document.getElementById("hours-until-change-id").innerHTML = " no pulution for the coming week"
+          document.getElementById("wind-direction-in-hours").innerHTML = "Time until polluted air"
+          document.getElementById("hours-until-change-id").innerHTML = " no pollution for the coming week"
         }
       }
 
@@ -438,7 +462,7 @@ if ("geolocation" in navigator) {
           document.getElementById("wind-direction").style.border = "2px solid rgb(0, 255, 21)";
           document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is not blowing towards your location";
-          document.getElementById("air-shield-img-id").src = "images/hollow-shield.svg";
+          document.getElementById("air-shield-img-id").src = "images/checked-shield.svg";
           document.getElementById("value-shield").innerHTML = "unactive";
           document.getElementById("green-cloud-id").classList.toggle("flowing-cloud");
         } else {
@@ -449,7 +473,7 @@ if ("geolocation" in navigator) {
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is blowing towards your location";
           document.getElementById("air-shield-img-id").src = "images/clear-shield.svg";
           document.getElementById("value-shield").innerHTML = "activated";
-          // document.getElementById("green-cloud-id").className += "flowing-cloud";
+          document.getElementById("green-cloud-id").src = "images/red-cloud.svg";
           document.getElementById("green-cloud-id").classList.toggle("stopping-cloud");
 
 

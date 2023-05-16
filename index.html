@@ -11,10 +11,13 @@
   <!-- blurred within body : class="blurred" for loading without info later -->
 
   <header class="header">
-      <!-- <div id="countdown-timer">wind calc</div> -->
-      <div class="current-location"><span class="label, location-name" id="current-location-id">LIVE LOCATION</span>
-        <img class="weather-icon large, icon-header, header-icon" src="icons/sun.png" data-current-icon>
-      </div>
+    <!-- <div id="countdown-timer">wind calc</div> -->
+    <div class="current-location"><span class="label, location-name" id="current-location-id">LIVE LOCATION</span>
+      <div class="info-group" id="weather-icon-id">Weather</div>
+      <div class="fill-div"></div>
+      <img class="weather-icon large, icon-header, header-icon" src="icons/sun.png" data-current-icon>
+
+    </div>
     <div class="map-div">
       <div class="map-with-location">
         <img src="images/map-no-data.png" id="temp-map-img">
@@ -28,11 +31,13 @@
       </div>
       <div class="info-group" id="shield-id">
         <div id="air-shield-text">AirShield</div>
+        <span id="value-shield"></span>
+
         <div><span class="value-shield"></span>
           <!-- header-icon class removed , circle removed -->
-          <img class="weather-icon large, icon-header, shield-icon" id="air-shield-img-id" src="images/hollow-shield.svg">
+          <img class="weather-icon large, icon-header, shield-icon" id="air-shield-img-id"
+            src="images/checked-shield.svg">
           <img class="weather-icon large, icon-header, shield-icon, " id="green-cloud-id" src="images/green-cloud.svg">
-          <span id="value-shield"> not active</span>
         </div>
       </div>
     </div>
@@ -298,7 +303,7 @@
         <div class="info-group">
           <div class="label">Wind</div>
           <img src="images/green-arrow.svg" alt="↑" class="green-arrow-hour" id="green-arrow-hour-id">
-          <div><span data-wind=""></span><span class="value-sub-info">&deg;</span></div>
+          <div class="hidden"><span data-wind></span><span class="value-sub-info">&deg;</span></div>
         </div>
       </td>
       <td>
