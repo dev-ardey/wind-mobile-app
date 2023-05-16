@@ -24,6 +24,9 @@ body {
   overflow: hidden;
 }
 
+.hover {
+  /* create pop up list with info */
+}
 
 .header {
   display: grid;
@@ -187,7 +190,58 @@ body {
   }
 }
 
+.flowing-cloud {
+  animation: flowing-cloud 4.5s linear infinite;
+}
 
+@keyframes flowing-cloud {
+  0% {
+    position: absolute;
+    right: 200px;
+    opacity: 0;
+  }
+  35% {
+    opacity: 5;
+  }
+  50% {
+    opacity: 10;
+  }
+  65% {
+    opacity: 5;
+  }
+  100% {
+    position: absolute;
+    right: 50px;
+    opacity: 0;
+  }
+}
+
+.stopping-cloud {
+  animation: stopping-cloud 2.5s ease-out infinite;
+}
+
+@keyframes stopping-cloud {
+  0% {
+    position: absolute;
+    right: 200px;
+    opacity: 0;
+    /* delay: 2s; */
+  }
+  35% {
+    opacity: 5;
+  }
+  50% {
+    opacity: 10;
+  }
+  65% {
+    opacity: 5;
+  }
+  100% {
+    position: absolute;
+    right: 150px;
+    opacity: 0;
+  }
+}
 
 /* /animation */
 

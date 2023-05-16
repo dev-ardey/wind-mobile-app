@@ -384,9 +384,15 @@ function renderHourlyWeather(hourly) {
         }
         const consecutiveCount = (countConsecutiveNumbers(expectedGreenChanges) + 1);
         // console.log("Consecutive Numbers Count:", consecutiveCount);
+        // if the hour is at the last hour
         if (calculatedExpectedRedChange == 0) {
           document.getElementById("wind-direction-in-hours").innerHTML = "Time until clean air"
           document.getElementById("hours-until-change-id").innerHTML = consecutiveCount + " hours"
+        }
+        // if everything is green for a week
+        if ((expectedGreenChanges && expectedChanges) == 0) {
+          document.getElementById("wind-direction-in-hours").innerHTML = "Time until clean air"
+          document.getElementById("hours-until-change-id").innerHTML = " no pulution for the coming week"
         }
       }
 
@@ -432,12 +438,21 @@ if ("geolocation" in navigator) {
           document.getElementById("wind-direction").style.border = "2px solid rgb(0, 255, 21)";
           document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is not blowing towards your location";
+          document.getElementById("air-shield-img-id").src = "images/hollow-shield.svg";
+          document.getElementById("value-shield").innerHTML = "unactive";
+          document.getElementById("green-cloud-id").classList.toggle("flowing-cloud");
         } else {
           // console.log("current arrow should be red ")
           // document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(255, 112, 119)";
           document.getElementById("green-arrow-id").src = "images/red-arrow.svg";
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is blowing towards your location";
+          document.getElementById("air-shield-img-id").src = "images/clear-shield.svg";
+          document.getElementById("value-shield").innerHTML = "activated";
+          // document.getElementById("green-cloud-id").className += "flowing-cloud";
+          document.getElementById("green-cloud-id").classList.toggle("stopping-cloud");
+
+
           // Calculate the time until the wind direction changes towards the user from point A
           // var timeToChange = calculateTimeToChange(windDeg, fromADeg);
           // updateTimer(timeToChange * 60); 
