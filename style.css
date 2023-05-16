@@ -1,3 +1,7 @@
+/* media for mobile */
+@media only screen and (max-width: 1028px) {
+ 
+
 /* general */
 *, *::after, *::before {
   box-sizing: border-box;
@@ -84,6 +88,13 @@ body {
   text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
   display: flex;
   justify-self: right;
+}
+
+#temp-text-id {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--white);
+  text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
 }
 
 .map-div {
@@ -413,7 +424,458 @@ body {
   padding: 0.25rem;
 }
 
+/* closing media for mobile */
+}
+
+/* ......................................................................................................... */
+
+/* media for tablets and desktop */
+
+@media only screen and (min-width: 1028px) {
+ 
+
+  /* general */
+  *, *::after, *::before {
+    box-sizing: border-box;
+  }
+  
+  /* hide elements and dont damage data */
+  .hidden {
+    display: none;
+  }
+  
+  :root {
+    --blue: hsl(200, 100%, 10%);
+    --white: rgb(255, 255, 255);
+  }
+  body {
+    background: linear-gradient(180deg, black, black);
+    color: var(--white);
+    font-family: sans-serif;
+    height: 100%;
+  }
+  
+  .blurred {
+    filter: blur(3px);
+    overflow: hidden;
+  }
+  
+  .hover {
+    /* create pop up list with info */
+  }
+  
+  .header {
+    display: grid;
+    align-items: center;
+    padding: 2.5rem;
+    /* background: linear-gradient(180deg, rgb(91, 208, 255),rgb(0, 134, 243) 80%,rgb(0, 93, 243) 100%); */
+    background: linear-gradient(217deg, rgba(0, 242, 255, 0.4), rgba(0, 134, 243,0.5) 70.71%),
+    /* linear-gradient(137deg, rgba(0, 255, 136, 0.8), rgba(0, 134, 243,0.5) 70.71%),      original  */
+    linear-gradient(137deg, rgba(0, 225, 255, 0.8), rgba(0, 134, 243,0.5) 70.71%),            
+    linear-gradient(366deg, rgba(0,0,255,.8), rgb(0, 134, 243) 90.71%);
+    border-radius: 60px;
+    height: max-content;
+    box-shadow: 0px 30px 30px rgb(0, 134, 243, 0.3) ;
+    /* border: 2px solid rgb(0, 134, 243); */
+    border: 2px solid rgb(0, 162, 243);
+  }
+  
+  .current-location {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 5%;
+    margin-bottom: -15%;
+  }
+  
+  #current-location-id {
+    display: flex;
+    align-self: center;
+    max-width: fit-content;
+  }
+  
+  .location-name {
+    /* border: 1px solid rgb(255, 255, 255, 0.5); */
+    border-radius: 30px;
+    padding: 5px 15px 5px 15px; 
+    border: 2px solid rgb(0, 255, 21);
+  }
+  
+  .header-icon {
+    display: grid;
+    /* justify-content: right; */
+    justify-self: right;
+    position: relative;
+    left: -20px;
+    top: 300px;
+    /* border-radius: 50%; */
+    /* border: 2px solid rgb(0, 255, 247); */
+    /* box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ; */
+    /* background-color: tomato; */
+  }
+  
+  #weather-icon-id {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--white);
+    text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+    display: flex;
+    justify-self: right;
+    position: relative;
+    top: 300px;
+    left: -5px;
+  }
+  
+  #temp-text-id {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--white);
+    text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+  }
+  
+  .map-div {
+    display: grid;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    height: 100%;;
+    /* background-color: white; */
+    border-radius: 20px;
+    color: black;
+    padding-top: 10%;
+  }
+  
+  #temp-map-img {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    padding-top: -10px;
+    border-radius: 50%;
+    box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
+    border: 2px solid rgb(0, 255, 247);
+  }
+  
+  .inline-div {
+    display:flex;
+    justify-content: right;
+    position: relative;
+    top: -200px;
+  }
+  
+  #temp-id {
+    display: flex;
+    justify-self: right;
+    margin-top: -200px;
+  }
+  
+  #air-shield-text {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--white);
+    text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+  }
+  
+  #shield-id {
+    display: flex;
+    justify-self: left;
+    margin-left: -115px;
+    position: inherit;
+  }
+  
+  .shield-icon {
+    padding: 7px; 
+  }
+  
+  #green-cloud-id {
+    display: flex;
+    justify-self: right;
+    position: relative;
+    bottom: 0px;
+  }
+  
+  
+  .header-top {
+    display: grid;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+    padding: 5% 15% 5% 15%;
+  }
+  
+  .green-arrow-current {
+    display:grid;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    max-width: 500px;
+    height: 70%;
+    margin-bottom: -20%;
+    margin-top: -20%;
+    /* button colors for js */
+    /* background: linear-gradient(rgb(252, 74, 127),rgb(255, 112, 119)); */
+    /* background: linear-gradient(rgb(0, 255, 21), rgb(39, 255, 208)); */
+  }
+  
+  
+  /* animation */
+  
+  .header-top {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-20px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
+  }
+  
+  .location-name {
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      border: 2px solid rgb(0, 255, 21);
+      box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
+    }
+    75% {
+      border: 2px solid rgb(0, 255, 21, 0.3);
+      box-shadow: 5px 2px 10px rgb(0, 0, 0, 0.2) ;
+    }
+    100% {
+      border: 2px solid rgb(0, 255, 21);
+      box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
+    }
+  }
+  
+  .flowing-cloud {
+    animation: flowing-cloud 4.5s linear infinite;
+  }
+  
+  @keyframes flowing-cloud {
+    0% {
+      position: absolute;
+      right: 200px;
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 1;
+    }
+    100% {
+      position: absolute;
+      right: 10px;
+      opacity: 0;
+    }
+  }
+  
+  .stopping-cloud {
+    animation: stopping-cloud 2.5s ease-out infinite;
+  }
+  
+  @keyframes stopping-cloud {
+    0% {
+      position: absolute;
+      right: 200px;
+      opacity: 0;
+      /* delay: 2s; */
+    }
+    25% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      right: 50px;
+      
+    }
+    75% {
+      opacity: 1;
+   
+    }
+    100% {
+      position: absolute;
+      right: 50px;
+      opacity: 0;
+    }
+  }
+  
+  /* /animation */
+  
+  #wind-direction {
+    
+    width: 100%;
+    max-width: fit-content;
+    height: 100%;
+    display: grid;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: var(--white);
+    text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+    margin-bottom: 5%;
+    box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
+  }
+  .air-api {
+    display: flex;
+    justify-content: center;
+  }
 
 
+  /*   display: none; voor weather icon om volledig te verbergen op elke */
+  
+  /* eerst nieuwe mooie weather icons downloaden en in map zetten daarna pas aanzetten. */
+  /* als het teveel afleid weg laten, focu is windrichting */
+  .weather-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    /* display: none; */
+  }
+  
+  .weather-icon.large {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .header-current-wind {
+    display: grid;
+    display: inline-block;
+    justify-content: center;
+    text-align: center;
+    margin-left: 2rem;
+      /* no .label, using manual to make it bigger */
+      text-transform: uppercase;
+      font-weight: 400;
+      font-size: 5rem;
+      color: var(--white);
+      text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+      margin-bottom: 10px;
+  }
+  
+  .border {
+    border-top: 2px solid rgb(0, 162, 243, 0.5);
+    margin-top: 5%;
+    margin-bottom: -10%;
+  }
+  
+  .header-bottom {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    grid-template-columns: repeat(3, auto);
+    /* grid-template-rows: repeat(3, auto); */
+    border-top: 1px solid rgb(0, 162, 243, 0.5);
+    padding-top: 10%;
+  }
 
-
+  
+  
+  /* bezig met het center alignenen van dezezon */
+  .icon-header {
+    display: grid;
+    width: 100%;
+    /* justify-content: left; */
+    margin-bottom: 10%;
+    margin-top: -5%;
+  }
+  
+  .info-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .label {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--white);
+    text-shadow: 0px 0px 5px rgb(255, 255, 255,0.5);
+  }
+  
+  .value-sub-info {
+    font-weight: 400;
+    font-size: 1rem;
+  }
+  
+  .day-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,100px);
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .day-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 3px solid var(--white); */
+    border-radius: 20px;
+    padding: 1rem;
+  }
+  
+  .day-card-day {
+    margin-top: 1rem;
+  }
+  
+  .green-arrow-day {
+    width: 60px;
+    height: 60px;
+  }
+  
+  /* add background specificly for current day */
+  
+  /* first make it available as a class, and put that class, on the selected day, change interface also to that days data */
+  /* staat nu tijdelijk op huidige dag */
+  .day-card-background {
+    background-color: tomato;
+  }
+  
+  .hour-section {
+    width:100%;
+    text-align: center;
+    border-spacing: 0;
+  }
+  
+  .green-arrow-hour {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .hour-row {
+    background-color: rgba(45, 45, 45, 0.3);
+  }
+  
+  .hour-row:nth-child(2n) {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .hour-row > td {
+    padding: 0.25rem;
+  }
+  
+  
+  
+  
+  
+  }
