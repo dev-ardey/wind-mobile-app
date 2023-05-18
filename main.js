@@ -1,5 +1,7 @@
 // npm run dev in terminal to run this application in browser
 
+console.log("javascript works")
+
 const coordintes = {
   //default is old incorrect location
   default: {
@@ -87,7 +89,6 @@ function renderCurrentWeather(current) {
   // maby i can use something like this to rotate green-arrow-id?
   arrowRotate(document.querySelectorAll('.green-arrow-current'), current.windDirection)
   //  arrowColor(document.querySelectorAll('.green-arrow-current'), current.windDirection)
-  console.log(current.windDirection)
   // change map air direction according to what the current degree is
   if ((current.windDirection >= 337.5 || current.windDirection <= 22.5)) {
     document.getElementById("temp-map-img").src = "images/map-180.png";
@@ -326,8 +327,8 @@ function renderHourlyWeather(hourly) {
       //
       if (index === hourly.length - 1) {
         // use expectedChanges  i for X
-        console.log({ expectedChanges })
-        console.log({ expectedGreenChanges })
+        // console.log({ expectedChanges })
+        // console.log({ expectedGreenChanges })
 
         // (expectedChanges[0] -1) is minus current hour
         const calculatedExpectedRedChange = (expectedChanges[0] - 1)
