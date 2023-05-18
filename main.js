@@ -10,7 +10,14 @@ const coordintes = {
   }
 }
 
-// delaying request rate with 2 seconds to prevent API block
+// delaying request rate with 2 seconds to prevent API block at first load, then once every 10 minutes
+// so that if one user is using 2 requests max every 10 minutes. 
+// 1h = 3 600 000 / 3600 = 1000 = 1 request per sec per user
+// 1h = 3 600 0000 / 600 000 = 6000 = 6 request per sec for all users
+// and 2 requests per 600 000(per 10 minutes) = 3 600 0000 / 600 000 = 6 request per hour per user
+// 6 request per hour per user for 3600 requests possible = 600 users per hour.
+let isFirstRequest = true;
+
 function makeAPIRequest() {
   // make API request with API key
   fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordintes.tata_steel.lat}&lon=${coordintes.tata_steel.lon}&appid=97d43aa82bbe2a80042bef503d4d9a34`)
@@ -21,9 +28,11 @@ function makeAPIRequest() {
     .catch(error => console.error(error));
 
   // add delay before making the next request
+  const delay = isFirstRequest ? 2000 : 600000; // 2000 milliseconds for the first request, 10 minutes (600,000 milliseconds) for subsequent requests
   setTimeout(() => {
+    isFirstRequest = false; // update the flag after the first request
     makeAPIRequest();
-  }, 2000); // delay of 2 seconds
+  }, delay);
 }
 
 // call the function to start making API requests
@@ -78,7 +87,7 @@ function renderCurrentWeather(current) {
   // maby i can use something like this to rotate green-arrow-id?
   arrowRotate(document.querySelectorAll('.green-arrow-current'), current.windDirection)
   //  arrowColor(document.querySelectorAll('.green-arrow-current'), current.windDirection)
-
+  console.log(current.windDirection)
   // change map air direction according to what the current degree is
   if ((current.windDirection >= 337.5 || current.windDirection <= 22.5)) {
     document.getElementById("temp-map-img").src = "images/map-180.png";
@@ -124,67 +133,7 @@ function arrowColor(elems) {
   })
 }
 
-// new function that selects a new image for the fitting coordinates, in hour maak een if (wind is 350 - 20) { geef src img map-0}
-// function imageSelector(elems, windDirection) {
-//   if (elems.length == 0) return;
-//   elems.forEach(function (el) {
-//     document.getElementById("temp-map-img").src = "images/green-arrow.svg";
-//    if ((day.windDirection > 0 && day.windDirection < 40) || ((day.windDirection > 340 && day.windDirection < 360))) {
-//   arrowColor([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection)
-// }
-//   })
-// }
 
-// test new function with if statement
-function imageSelector(elems, windDirection) {
-  if (elems.length == 0) return;
-  elems.forEach(function (el) {
-    // if wind is pointing to 0 deg
-    if ((hour.windDirection > 340 && hour.windDirection < 360) || ((hour.windDirection > 0 && hour.windDirection < 40))) {
-      document.getElementById("temp-map-img").src = "images/map-0.png";
-    }
-    // add all other directions
-
-    // if{
-    //  if (windspeed <= 50???) {use smaller flow image}
-    //  else { normal img}
-    // }
-
-    // if 
-
-    // if 
-
-    // if
-  })
-}
-
-// old daily
-// const DAY_FORMATTER = Intl.DateTimeFormat(undefined, { weekday: "short" })
-// const dailySection = document.querySelector("[data-day-section]")
-// const dayCardTemplate = document.getElementById("day-card-template")
-// function renderDailyWeather(daily) {
-//   dailySection.innerHTML = ""
-//   daily.forEach((day, index) => {
-//     // clone a template
-//     const element = dayCardTemplate.content.cloneNode(true)
-//     // set data temp within the just created clone
-//     setValue("temp", day.maxTemp, { parent: element })
-//     // format day as day not as date
-//     setValue("date", DAY_FORMATTER.format(day.timestamp), { parent: element })
-//     // get actual icon
-//     element.querySelector("[data-icon]").src = getIconUrl(day.iconCode)
-//     dailySection.append(element)
-//     arrowRotate([document.querySelectorAll('.green-arrow-day')[index]], (day.windDirection))
-
-
-//     //werkende daily hardcoded
-//     if ((day.windDirection > 0 && day.windDirection < 40) || ((day.windDirection > 340 && day.windDirection < 360))) {
-//       // comented out tot hour goed is
-//       // arrowColor([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection)
-//     }
-
-//   })
-// }
 
 
 

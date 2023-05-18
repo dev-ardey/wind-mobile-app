@@ -1,8 +1,36 @@
-import axios from "axios"
+import axios from "axios";
+
+let isFirstRequest = true;
 
 export function getWeather(lat, lon, timezone) {
-    // console.log("1st api lat = " + lat)
-    // console.log("1st api lat = " + lon)
+    const makeAPIRequest = () => {
+        axios
+            .get(
+                "https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,precipitation,weathercode,winddirection_10m,winddirection_80m,winddirection_120m,winddirection_180m,windgusts_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,winddirection_10m_dominant&current_weather=true&timeformat=unixtime",
+                {
+                    params: {
+                        latitude: lat,
+                        longitude: lon,
+                        timezone,
+                    },
+                }
+            )
+            .then(({ data }) => {
+                // console.log(data); // Log the weather data to the console
+
+                const delay = isFirstRequest ? 2000 : 600000; // 0 milliseconds for the first request, 10 minutes (600,000 milliseconds) for subsequent requests
+                setTimeout(() => {
+                    isFirstRequest = false; // Update the flag after the first request
+                    makeAPIRequest();
+                }, delay);
+            })
+            .catch(error => console.error(error));
+    };
+
+    // Call the function to start making API requests
+    makeAPIRequest();
+
+    // Return a Promise that resolves with the parsed weather data
     return axios
         .get(
             "https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,precipitation,weathercode,winddirection_10m,winddirection_80m,winddirection_120m,winddirection_180m,windgusts_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,winddirection_10m_dominant&current_weather=true&timeformat=unixtime",
@@ -11,23 +39,18 @@ export function getWeather(lat, lon, timezone) {
                     latitude: lat,
                     longitude: lon,
                     timezone,
-                }
-            })
-
-        .then(({ data }) => {
-            // exampleof parse daily time.map
-            // return data
-            // console.log(data)
-            return {
-                current: parseCurrentWeather(data),
-                daily: parseDailyWeather(data),
-                hourly: parseHourlyWeather(data),
-                // parseArrowWeather is new and gives data to parseArrowWeather
-                arrow: parseArrowWeather(data),
-                // arrowHour: parseArrowHourWeather(data),
+                },
             }
-        })
+        )
+        .then(({ data }) => ({
+            current: parseCurrentWeather(data),
+            daily: parseDailyWeather(data),
+            hourly: parseHourlyWeather(data),
+            arrow: parseArrowWeather(data),
+        }))
+        .catch(error => console.error(error));
 }
+
 
 // parseArrowWeather function is new
 
