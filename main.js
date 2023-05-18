@@ -92,25 +92,25 @@ function renderCurrentWeather(current) {
   if ((current.windDirection >= 337.5 || current.windDirection <= 22.5)) {
     document.getElementById("temp-map-img").src = "images/map-180.png";
   }
-  if ((current.windDirection >= 22.6 || current.windDirection <= 67.5)) {
+  else if ((current.windDirection >= 22.6 || current.windDirection <= 67.5)) {
     document.getElementById("temp-map-img").src = "images/map-225.png";
   }
-  if ((current.windDirection >= 67.6 || current.windDirection <= 112.5)) {
+  else if ((current.windDirection >= 67.6 || current.windDirection <= 112.5)) {
     document.getElementById("temp-map-img").src = "images/map-270.png";
   }
-  if ((current.windDirection >= 112.6 || current.windDirection <= 157, 6.5)) {
+  else if ((current.windDirection >= 112.6 || current.windDirection <= 157, 6.5)) {
     document.getElementById("temp-map-img").src = "images/map-315.png";
   }
-  if ((current.windDirection >= 157.6 || current.windDirection <= 202.5)) {
+  else if ((current.windDirection >= 157.6 || current.windDirection <= 202.5)) {
     document.getElementById("temp-map-img").src = "images/map-0.png";
   }
-  if ((current.windDirection >= 202.6 || current.windDirection <= 247.5)) {
+  else if ((current.windDirection >= 202.6 || current.windDirection <= 247.5)) {
     document.getElementById("temp-map-img").src = "images/map-45.png";
   }
-  if ((current.windDirection >= 247.6 || current.windDirection <= 292.5)) {
+  else if ((current.windDirection >= 247.6 || current.windDirection <= 292.5)) {
     document.getElementById("temp-map-img").src = "images/map-90.png";
   }
-  if ((current.windDirection >= 292.6 || current.windDirection <= 337.5)) {
+  else if ((current.windDirection >= 292.6 || current.windDirection <= 337.5)) {
     document.getElementById("temp-map-img").src = "images/map-135.png";
   }
 }
