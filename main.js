@@ -41,7 +41,7 @@ function makeAPIRequest() {
 makeAPIRequest();
 
 // import css style file
-import "./style.css";
+// import "./style.css";
 import { getWeather } from "./wind";
 import { ICON_MAP } from "./iconMap";
 // link to current location
