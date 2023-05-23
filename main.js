@@ -1,7 +1,4 @@
 // npm run dev in terminal to run this application in browser
-
-console.log("javascript works")
-
 const coordintes = {
   //default is old incorrect location
   default: {
@@ -78,6 +75,28 @@ function getIconUrl(iconCode) {
   return `icons/${ICON_MAP.get(iconCode)}.png`
 }
 
+// vite URL code above code that uses it
+const redArrowUrl = new URL('images/red-arrow.svg', import.meta.url).href;
+const greenArrowUrl = new URL('images/green-arrow.svg', import.meta.url).href;
+const greenArrowDayUrl = new URL('images/green-arrow.svg', import.meta.url).href;
+const greenArrowHourUrl = new URL('images/green-arrow.svg', import.meta.url).href;
+const redCloudUrl = new URL('images/red-cloud.svg', import.meta.url).href;
+// const greenCloudUrl = new URL('images/green-cloud.svg', import.meta.url).href;
+// const activatedShieldUrl = new URL('images/activated-shield.svg', import.meta.url).href;
+const checkedShieldUrl = new URL('images/checked-shield.svg', import.meta.url).href;
+const clearShieldUrl = new URL('images/clear-shield.svg', import.meta.url).href;
+const map135Url = new URL('images/map-135.png', import.meta.url).href;
+const map180Url = new URL('images/map-180.png', import.meta.url).href;
+const map270Url = new URL('images/map-270.png', import.meta.url).href;
+const map90Url = new URL('images/map-90.png', import.meta.url).href;
+const map45Url = new URL('images/map-45.png', import.meta.url).href;
+const map225Url = new URL('images/map-225.png', import.meta.url).href;
+const map315Url = new URL('images/map-315.png', import.meta.url).href;
+const map0Url = new URL('images/map-0.png', import.meta.url).href;
+
+
+
+
 const currentIcon = document.querySelector("[data-current-icon]")
 function renderCurrentWeather(current) {
   currentIcon.src = getIconUrl(current.iconCode)
@@ -88,31 +107,32 @@ function renderCurrentWeather(current) {
   setValue("current-precip", current.precip)
   // maby i can use something like this to rotate green-arrow-id?
   arrowRotate(document.querySelectorAll('.green-arrow-current'), current.windDirection)
+  // console.log(current.windDirection)
   //  arrowColor(document.querySelectorAll('.green-arrow-current'), current.windDirection)
   // change map air direction according to what the current degree is
   if ((current.windDirection >= 337.5 || current.windDirection <= 22.5)) {
-    document.getElementById("temp-map-img").src = "images/map-180.png";
+    document.getElementById("temp-map-img").src = map180Url;
   }
   else if ((current.windDirection >= 22.6 || current.windDirection <= 67.5)) {
-    document.getElementById("temp-map-img").src = "images/map-225.png";
+    document.getElementById("temp-map-img").src = map225Url;
   }
   else if ((current.windDirection >= 67.6 || current.windDirection <= 112.5)) {
-    document.getElementById("temp-map-img").src = "images/map-270.png";
+    document.getElementById("temp-map-img").src = map270Url;
   }
   else if ((current.windDirection >= 112.6 || current.windDirection <= 157, 6.5)) {
-    document.getElementById("temp-map-img").src = "images/map-315.png";
+    document.getElementById("temp-map-img").src = map315Url;
   }
   else if ((current.windDirection >= 157.6 || current.windDirection <= 202.5)) {
-    document.getElementById("temp-map-img").src = "images/map-0.png";
+    document.getElementById("temp-map-img").src = map0Url;
   }
   else if ((current.windDirection >= 202.6 || current.windDirection <= 247.5)) {
-    document.getElementById("temp-map-img").src = "images/map-45.png";
+    document.getElementById("temp-map-img").src = map45Url;
   }
   else if ((current.windDirection >= 247.6 || current.windDirection <= 292.5)) {
-    document.getElementById("temp-map-img").src = "images/map-90.png";
+    document.getElementById("temp-map-img").src = map90Url;
   }
   else if ((current.windDirection >= 292.6 || current.windDirection <= 337.5)) {
-    document.getElementById("temp-map-img").src = "images/map-135.png";
+    document.getElementById("temp-map-img").src = map135Url;
   }
 }
 
@@ -129,8 +149,15 @@ function arrowColor(elems) {
   elems.forEach(function (el) {
     // windDirection + 180 is omdat image op de kop is
     // el.style.backgroundColor = 'red'
-    el.src = "images/red-arrow.svg";
+    el.src = redArrowUrl;
 
+  })
+}
+
+function arrowColorGreen(elems) {
+  if (elems.length == 0) return;
+  elems.forEach(function (el) {
+    el.src = greenArrowUrl;
   })
 }
 
@@ -213,6 +240,12 @@ function renderDailyWeather(daily) {
 
         // FUNCTIE LIJKT HET TE DOEN MAAR MAAKT GEEN CONNECTIE MET GREEN ARROW DAY
       }
+
+      if (!dayWindBlowingFrom(newWindDirection, windFromTata)) {
+        arrowColorGreen([document.querySelectorAll('.green-arrow-day')[index]], day.windDirection);
+      }
+
+
       //als ik volgende functie gebruik met zelfde outcome geeft ie wel correcte pijlen
       // dus of functie zelf is niet goed, foutje gemaakt ergens, of hij laat verkeerde pijen zien / windfromtata + 180? of iets anders?
       // if ((day.windDirection > 0 && day.windDirection < 40) || ((day.windDirection > 340 && day.windDirection < 360))) {
@@ -293,6 +326,7 @@ function renderHourlyWeather(hourly) {
       hourlySection.append(element)
 
       arrowRotate([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection)
+      // console.log(hour.windDirection)
       const newWindDirection = hour.windDirection
       // console.log(windFromTata)
       // console.log(newWindDirection)
@@ -322,6 +356,10 @@ function renderHourlyWeather(hourly) {
         // console.log("hourly arrows should be green ")
         arrowColor([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
 
+      }
+
+      if (!hourWindBlowingFrom(newWindDirection, windFromTata)) {
+        arrowColorGreen([document.querySelectorAll('.green-arrow-hour')[index]], hour.windDirection);
       }
 
       //
@@ -410,35 +448,26 @@ if ("geolocation" in navigator) {
           // console.log("current arrow should be green ")
           // document.getElementById("wind-direction").style.background = "linear-gradient( rgb(39, 255, 208), rgb(0, 255, 21))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(0, 255, 21)";
-          document.getElementById("green-arrow-id").src = "images/green-arrow.svg";
+          document.getElementById("green-arrow-id").src = greenArrowUrl;
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is not blowing towards your location";
-          document.getElementById("air-shield-img-id").src = "images/checked-shield.svg";
+          document.getElementById("air-shield-img-id").src = checkedShieldUrl;
           document.getElementById("value-shield").innerHTML = "unactive";
           document.getElementById("green-cloud-id").classList.toggle("flowing-cloud");
         } else {
           // console.log("current arrow should be red ")
           // document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";
           document.getElementById("wind-direction").style.border = "2px solid rgb(255, 112, 119)";
-          document.getElementById("green-arrow-id").src = "images/red-arrow.svg";
+          document.getElementById("green-arrow-id").src = redArrowUrl;
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is blowing towards your location";
-          document.getElementById("air-shield-img-id").src = "images/clear-shield.svg";
+          document.getElementById("air-shield-img-id").src = clearShieldUrl;
           document.getElementById("value-shield").innerHTML = "activated";
-          document.getElementById("green-cloud-id").src = "images/red-cloud.svg";
+          document.getElementById("green-cloud-id").src = redCloudUrl;
           document.getElementById("green-cloud-id").classList.toggle("stopping-cloud");
 
 
-          // Calculate the time until the wind direction changes towards the user from point A
-          // var timeToChange = calculateTimeToChange(windDeg, fromADeg);
-          // updateTimer(timeToChange * 60); 
-          // convert time to seconds
-
-          // Update the HTML element with the ID "wind-direction" to show the remaining time until the wind direction changes
-          // document.getElementById("wind-direction").innerHTML = "Time until wind direction change: " + timeToChange + " seconds";
-          // setInterval(function () {
-          //   timeToChange--;
-          //   document.getElementById("wind-direction").innerHTML = "Time until wind direction change: " + timeToChange + " seconds";
-          // }, 1000);
         }
+
+
       });
   });
 }

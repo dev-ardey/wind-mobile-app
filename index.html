@@ -3,21 +3,78 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <title>Wind App</title>
   <link rel="stylesheet" href="./style.css" type="text/css" />
   <link rel="icon" type="image/x-icon" href="/images/activated-shield.svg">
 </head>
 
 <body class="blurred">
+
   <!-- blurred within body : class="blurred" for loading without info later -->
+
+  <div class="air-shield-popup" id="hide-popup-red">
+    <div id="overlay-red">
+      <!-- class="hidden?" -->
+      <div class="" id="air-shield-popup-red-id">
+        <ul class="popup-list label">
+          <img src="images/activated-shield.svg" class="air-shield-popup-img">
+          <p class="popup-text-big">Protection Advised</p>
+          <br>
+          <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
+          <br>
+          <li class="popup-text-small">Check AirShield before leaving</li>
+          <br>
+          <li class="popup-text-small">Avoid outdoor activities inside the polluted zone</li>
+          <br>
+          <li class="popup-text-small">Try and go to a non polluted zone when outside</li>
+          <br>
+          <li class="popup-text-small">Stay indoors and close the windows</li>
+          <br>
+          <li class="popup-text-small">Consider using air purifiers indoors</li>
+          <br>
+          <li class="popup-text-small">Wear a mask</li>
+          <br>
+          <br>
+          <p id="text-src"> ~ Advised by harvard </p>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="air-shield-popup" id="hide-popup-green">
+    <div id="overlay-green">
+      <!-- class="hidden?" -->
+      <div class="" id="air-shield-popup-green-id">
+        <ul class="popup-list label">
+          <img src="images/clear-shield.svg" class="air-shield-popup-img">
+          <p class="popup-text-big">No protection needed</p>
+          <br>
+          <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
+          <br>
+          <li class="popup-text-small">Check AirShield before leaving</li>
+          <br>
+          <li class="popup-text-small">isolate seams and cracks in your house</li>
+          <br>
+          <li class="popup-text-small">Try and go to a non polluted zone when outside</li>
+          <br>
+          <li class="popup-text-small">Consider using air purifiers indoors</li>
+          <br>
+          <br>
+          <p class="text-src"> ~ Advised by harvard </p>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 
   <header class="header">
     <!-- <div id="countdown-timer">wind calc</div> -->
     <div class="current-location"><span class="label, location-name" id="current-location-id">LIVE LOCATION</span>
       <div class="info-group" id="weather-icon-id">Weather</div>
       <div class="fill-div"></div>
-      <img class="weather-icon large, icon-header, header-icon" src="icons/sun.png" data-current-icon>
+      <img class="weather-icon large, icon-header, header-icon" id="weather-icon-img" src="icons/sun.png"
+        data-current-icon>
 
     </div>
     <div class="map-div">
@@ -29,7 +86,8 @@
     <div class="inline-div">
       <div class="info-group" id="temp-id">
         <div id="temp-text-id">Temperature</div>
-        <div class="label"><span data-current-temp>9</span><span class="value-sub-info">&deg;</span></div>
+        <div class="label" id="temp-current-id"><span data-current-temp>9</span><span
+            class="value-sub-info">&deg;</span></div>
       </div>
       <div class="info-group" id="shield-id">
         <div id="air-shield-text">AirShield</div>
