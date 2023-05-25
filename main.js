@@ -451,8 +451,19 @@ if ("geolocation" in navigator) {
           document.getElementById("green-arrow-id").src = greenArrowUrl;
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is not blowing towards your location";
           document.getElementById("air-shield-img-id").src = checkedShieldUrl;
-          document.getElementById("value-shield").innerHTML = "unactive";
+          document.getElementById("value-shield").innerHTML = "unactive ⓘ";
           document.getElementById("green-cloud-id").classList.toggle("flowing-cloud");
+
+          document.getElementById("overlay-button").addEventListener("click", function () {
+            document.getElementById("overlay-green").classList.toggle("darken");
+            document.getElementById("air-shield-popup-green-id").classList.toggle("show");
+            document.getElementById("hide-popup-green").classList.toggle("show");
+            // document.getElementById("overlay-button").style.background = "rgba(46, 84, 190, 0.562)";
+            document.getElementById("overlay-button").classList.toggle("move-button-up");
+            // document.getElementById("overlay-button-img").classList.toggle("show");
+
+
+          });
         } else {
           // console.log("current arrow should be red ")
           // document.getElementById("wind-direction").style.background = "linear-gradient(rgb(255, 112, 119), rgb(252, 74, 127))";
@@ -460,11 +471,18 @@ if ("geolocation" in navigator) {
           document.getElementById("green-arrow-id").src = redArrowUrl;
           document.getElementById("wind-direction").innerHTML = "The wind from tatasteel is blowing towards your location";
           document.getElementById("air-shield-img-id").src = clearShieldUrl;
-          document.getElementById("value-shield").innerHTML = "activated";
+          document.getElementById("value-shield").innerHTML = "activated ⓘ";
           document.getElementById("green-cloud-id").src = redCloudUrl;
           document.getElementById("green-cloud-id").classList.toggle("stopping-cloud");
 
-
+          document.getElementById("overlay-button").addEventListener("click", function () {
+            document.getElementById("overlay-red").classList.toggle("darken");
+            document.getElementById("air-shield-popup-red-id").classList.toggle("show");
+            document.getElementById("hide-popup-red").classList.toggle("show");
+            // document.getElementById("overlay-button").style.background = "rgba(46, 84, 190, 0)";
+            document.getElementById("overlay-button").classList.toggle("move-button-up");
+            // document.getElementById("overlay-button-img").classList.toggle("show");
+          });
         }
 
 

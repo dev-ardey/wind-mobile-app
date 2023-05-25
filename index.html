@@ -13,12 +13,13 @@
 
   <!-- blurred within body : class="blurred" for loading without info later -->
 
-  <div class="air-shield-popup" id="hide-popup-red">
-    <div id="overlay-red">
+  <!-- <img src="images/activated-shield.svg" alt="activated-shield" id="pic-id"> -->
+  <div class="air-shield-popup " id="hide-popup-red">
+    <div id="overlay-red" class="">
       <!-- class="hidden?" -->
-      <div class="" id="air-shield-popup-red-id">
+      <div id="air-shield-popup-red-id" class="hidden">
         <ul class="popup-list label">
-          <img src="images/activated-shield.svg" class="air-shield-popup-img">
+          <img src="images/checked-shield.svg" class="air-shield-popup-img">
           <p class="popup-text-big">Protection Advised</p>
           <br>
           <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
@@ -42,12 +43,12 @@
     </div>
   </div>
 
-  <div class="air-shield-popup" id="hide-popup-green">
-    <div id="overlay-green">
+  <div class="air-shield-popup " id="hide-popup-green">
+    <div id="overlay-green" class="">
       <!-- class="hidden?" -->
-      <div class="" id="air-shield-popup-green-id">
+      <div id="air-shield-popup-green-id" class="hidden">
         <ul class="popup-list label">
-          <img src="images/clear-shield.svg" class="air-shield-popup-img">
+          <img src="images/x-shield.svg" class="air-shield-popup-img">
           <p class="popup-text-big">No protection needed</p>
           <br>
           <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
@@ -70,7 +71,8 @@
 
   <header class="header">
     <!-- <div id="countdown-timer">wind calc</div> -->
-    <div class="current-location"><span class="label, location-name" id="current-location-id">LIVE LOCATION</span>
+    <div class="current-location"><span class="label, location-name" id="current-location-id"> CLOSES POLLUTER: <br>TATA
+        STEEL</span>
       <div class="info-group" id="weather-icon-id">Weather</div>
       <div class="fill-div"></div>
       <img class="weather-icon large, icon-header, header-icon" id="weather-icon-img" src="icons/sun.png"
@@ -90,6 +92,9 @@
             class="value-sub-info">&deg;</span></div>
       </div>
       <div class="info-group" id="shield-id">
+        <!-- AirShield button -->
+        <button id="overlay-button" class="">
+        </button>
         <div id="air-shield-text">AirShield</div>
         <span id="value-shield"></span>
 
@@ -101,6 +106,7 @@
         </div>
       </div>
     </div>
+    <div class="label" id="current-text"><span>Current</span></div>
     <div class="border"></div>
     <div class="header-top">
       <div class="header-current-wind">
@@ -136,7 +142,7 @@
 
 
   </header>
-
+  <div class="label" id="daily-text"><span>daily</span></div>
   <section class="day-section" data-day-section>
     <div class="day-card">
       <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
@@ -184,6 +190,7 @@
 
   <table class="hour-section">
     <tbody data-hour-section>
+      <div class="label" id="hourly-text"><span>hourly</span></div>
       <tr class="hour-row">
         <td>
           <div class="info-group">
@@ -341,7 +348,6 @@
       <div><span data-temp></span><span>&deg;C</span></div>
     </div>
   </template>
-
   <template id="hour-row-template">
     <tr class="hour-row">
       <td>
@@ -366,9 +372,9 @@
           <div class="hidden"><span data-wind></span><span class="value-sub-info">&deg;</span></div>
         </div>
       </td>
-      <td>
+      <td class="hidden">
         <!-- hidden -->
-        <div class=", hidden">
+        <div class="hidden ">
           <div class="label">Precip</div>
           <div><span data-precip></span><span class="value-sub-info">mm</span></div>
         </div>

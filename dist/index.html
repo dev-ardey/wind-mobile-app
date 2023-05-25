@@ -7,19 +7,78 @@
   <title>Wind App</title>
   
   <link rel="icon" type="image/x-icon" href="/assets/activated-shield-b03a1822.svg">
-  <script type="module" crossorigin src="/assets/index-2d96a81f.js"></script>
-  <link rel="stylesheet" href="/assets/index-01c551f5.css">
+  <script type="module" crossorigin src="/assets/index-808e0b01.js"></script>
+  <link rel="stylesheet" href="/assets/index-d1156a40.css">
 </head>
 
 <body class="blurred">
+
   <!-- blurred within body : class="blurred" for loading without info later -->
+
+  <!-- <img src="images/activated-shield.svg" alt="activated-shield" id="pic-id"> -->
+  <div class="air-shield-popup " id="hide-popup-red">
+    <div id="overlay-red" class="">
+      <!-- class="hidden?" -->
+      <div id="air-shield-popup-red-id" class="hidden">
+        <ul class="popup-list label">
+          <img src="/assets/checked-shield-b046a8ae.svg" class="air-shield-popup-img">
+          <p class="popup-text-big">Protection Advised</p>
+          <br>
+          <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
+          <br>
+          <li class="popup-text-small">Check AirShield before leaving</li>
+          <br>
+          <li class="popup-text-small">Avoid outdoor activities inside the polluted zone</li>
+          <br>
+          <li class="popup-text-small">Try and go to a non polluted zone when outside</li>
+          <br>
+          <li class="popup-text-small">Stay indoors and close the windows</li>
+          <br>
+          <li class="popup-text-small">Consider using air purifiers indoors</li>
+          <br>
+          <li class="popup-text-small">Wear a mask</li>
+          <br>
+          <br>
+          <p id="text-src"> ~ Advised by harvard </p>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="air-shield-popup " id="hide-popup-green">
+    <div id="overlay-green" class="">
+      <!-- class="hidden?" -->
+      <div id="air-shield-popup-green-id" class="hidden">
+        <ul class="popup-list label">
+          <img src="/assets/x-shield-48597309.svg" class="air-shield-popup-img">
+          <p class="popup-text-big">No protection needed</p>
+          <br>
+          <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
+          <br>
+          <li class="popup-text-small">Check AirShield before leaving</li>
+          <br>
+          <li class="popup-text-small">isolate seams and cracks in your house</li>
+          <br>
+          <li class="popup-text-small">Try and go to a non polluted zone when outside</li>
+          <br>
+          <li class="popup-text-small">Consider using air purifiers indoors</li>
+          <br>
+          <br>
+          <p class="text-src"> ~ Advised by harvard </p>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 
   <header class="header">
     <!-- <div id="countdown-timer">wind calc</div> -->
-    <div class="current-location"><span class="label, location-name" id="current-location-id">LIVE LOCATION</span>
+    <div class="current-location"><span class="label, location-name" id="current-location-id"> CLOSES POLLUTER: <br>TATA
+        STEEL</span>
       <div class="info-group" id="weather-icon-id">Weather</div>
       <div class="fill-div"></div>
-      <img class="weather-icon large, icon-header, header-icon" id="weather-icon-img" src="icons/sun.png" data-current-icon>
+      <img class="weather-icon large, icon-header, header-icon" id="weather-icon-img" src="icons/sun.png"
+        data-current-icon>
 
     </div>
     <div class="map-div">
@@ -31,9 +90,13 @@
     <div class="inline-div">
       <div class="info-group" id="temp-id">
         <div id="temp-text-id">Temperature</div>
-        <div class="label" id="temp-current-id"><span data-current-temp>9</span><span class="value-sub-info">&deg;</span></div>
+        <div class="label" id="temp-current-id"><span data-current-temp>9</span><span
+            class="value-sub-info">&deg;</span></div>
       </div>
       <div class="info-group" id="shield-id">
+        <!-- AirShield button -->
+        <button id="overlay-button" class="">
+        </button>
         <div id="air-shield-text">AirShield</div>
         <span id="value-shield"></span>
 
@@ -45,6 +108,7 @@
         </div>
       </div>
     </div>
+    <div class="label" id="current-text"><span>Current</span></div>
     <div class="border"></div>
     <div class="header-top">
       <div class="header-current-wind">
@@ -80,7 +144,7 @@
 
 
   </header>
-
+  <div class="label" id="daily-text"><span>daily</span></div>
   <section class="day-section" data-day-section>
     <div class="day-card">
       <img src="icons/cloud.png" class="weather-icon, hidden" alt="">
@@ -128,6 +192,7 @@
 
   <table class="hour-section">
     <tbody data-hour-section>
+      <div class="label" id="hourly-text"><span>hourly</span></div>
       <tr class="hour-row">
         <td>
           <div class="info-group">
@@ -285,7 +350,6 @@
       <div><span data-temp></span><span>&deg;C</span></div>
     </div>
   </template>
-
   <template id="hour-row-template">
     <tr class="hour-row">
       <td>
@@ -310,9 +374,9 @@
           <div class="hidden"><span data-wind></span><span class="value-sub-info">&deg;</span></div>
         </div>
       </td>
-      <td>
+      <td class="hidden">
         <!-- hidden -->
-        <div class=", hidden">
+        <div class="hidden ">
           <div class="label">Precip</div>
           <div><span data-precip></span><span class="value-sub-info">mm</span></div>
         </div>

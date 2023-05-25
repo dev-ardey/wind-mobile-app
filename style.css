@@ -40,35 +40,39 @@ body {
   justify-content: center;
   align-content: center;
   text-align: center;
-  overflow: scroll;
 }
 
 #overlay-red {
   /* background-color: rgb(0, 0, 0); */
-  background-color: rgb(0, 0, 0, 0.6);
+  /* background-color: rgb(0, 0, 0, 0.6); */
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 2000px;
   position: absolute;
   z-index: 1;
+  /* margin vanwege auto div */
+  margin-left: -10px;
 }
 
 #overlay-green {
   /* background-color: rgb(0, 0, 0); */
-  background-color: rgb(0, 0, 0, 0.6);
+  /* background-color: rgb(0, 0, 0, 0.6); */
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 2000px;
   position: absolute;
   z-index: 1;
+  /* margin vanwege auto div */
+  margin-left: -10px;
 }
 
 #air-shield-popup-red-id {
-  background: linear-gradient(366deg, rgba(0, 255, 157, 0.5), rgb(0, 140, 255, 0.5) 95.71%);
+  /* background: linear-gradient(366deg, rgba(0, 255, 157, 0.5), rgb(0, 140, 255, 0.5) 95.71%); */
+  background: linear-gradient(366deg, rgba(0, 255, 157), rgb(0, 140, 255));
   backdrop-filter: blur(15px);
-  width: 90%;
+  width: fit-content;
   height: fit-content;
   position: absolute;
   margin-top: 50px;
@@ -78,12 +82,14 @@ body {
   text-align: center;
   padding: 20px;
   padding-bottom: 60px;
+  max-width: 350px;
 }
 
 #air-shield-popup-green-id {
-  background: linear-gradient(366deg, rgba(0, 255, 157, 0.5), rgb(0, 140, 255, 0.5) 95.71%);
+  /* background: linear-gradient(366deg, rgba(0, 255, 157, 0.5), rgb(0, 140, 255, 0.5) 95.71%); */
+  background: linear-gradient(366deg, rgba(0, 255, 157), rgb(0, 140, 255));
   backdrop-filter: blur(15px);
-  width: 90%;
+  width: fit-content;
   height: fit-content;
   position: absolute;
   margin-top: 50px;
@@ -93,11 +99,15 @@ body {
   text-align: center;
   padding: 20px;
   padding-bottom: 60px;
+  max-width: 350px;
 }
 
 .popup-list {
   display: grid;
   list-style: none;
+  grid-template-columns: repeat(1, 1fr);
+  justify-content: left;
+  padding: 0 0 0 0;
 }
 
 .popup-text-small {
@@ -105,7 +115,7 @@ body {
 }
 
 .air-shield-popup-img {
-  width: 80px;
+  width: 200px;
   display: flex;
   justify-self: center;
   padding-top: 30px;
@@ -113,27 +123,81 @@ body {
 
 .popup-text-big {
   font-size: 1.5rem;
+  display: grid;
+  align-content: center;
 }
 
 .text-src {
   font-size: 0.5rem;
 }
 
-#hide-popup-red {
-  display: none;
+#overlay-green {
+  display: hidden;
+}
+
+#overlay-red {
+  display: hidden;
+}
+
+ #hide-popup-red {
+  display: hidden;
 }
 
 #hide-popup-green {
-  display: none;
-}
+  display: hidden;
+} 
 
-#air-shield-popup-red-id {
-  display: none;
+ #air-shield-popup-red-id {
+  display: hidden;
 }
 
 #air-shield-popup-green-id {
-  display: none;
+  display: hidden;
+} 
+
+.show {
+  display: block;
 }
+
+.darken {
+  
+  /* background-color: rgba(0, 0, 0, 0.6); */
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.3) 90%);
+}
+
+
+
+#overlay-button {
+  position: absolute;
+  background-color: rgba(190, 68, 46, 0);
+  width: 100px;
+  height: 100px;
+  /* background-color: transparent; */
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+}
+
+#overlay-button-img {
+  display: hidden;
+  width: 50px;
+  height: 50px;
+}
+
+.move-button-up {
+  position: absolute;
+  top:0;
+  left:0;
+  padding-top: 100%;
+  padding-right:100%;
+  padding-bottom:400%;
+}
+
+#pic-id {
+  width: 100px;
+  height: 100px;
+}
+
 /* smaller content for small screens */
 
 .weather-icon {
@@ -142,9 +206,10 @@ body {
   object-fit: contain;
   /* display: none; */
 }
-/* #weather-icon-img {
-  margin-right: -5px;
-} */
+#weather-icon-img {
+  /* margin-right: -5px; */
+  margin-top: -5px;
+}
 
 #weather-icon-id{
   font-weight: 400;
@@ -238,6 +303,7 @@ body {
   border-radius: 30px;
   padding: 5px 15px 5px 15px; 
   border: 2px solid rgb(0, 255, 21);
+  text-align: center;
 }
 
 .header-icon {
@@ -540,6 +606,9 @@ body {
   gap: 1rem;
   justify-content: center;
   padding: 1rem;
+  /* box-shadow: 0px 30px 30px rgb(0, 134, 243, 0.3) ;
+  border: 2px solid rgb(0, 162, 243);
+  border-radius: 60px;; */
 }
 
 .day-card {
@@ -591,6 +660,43 @@ body {
   padding: 0.25rem;
 }
 
+#current-text {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(90deg, rgba(0, 255, 157), rgb(0, 119, 255));
+  border-radius: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: -10px;
+  box-shadow: 0px 20px 40px  rgb(0, 134, 243, 0.5) ;
+  border: 2px solid rgb(0, 204, 255);
+  border-radius: 60px;
+}
+
+#hourly-text {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(90deg, rgba(0, 255, 157), rgb(0, 140, 255));
+  border-radius: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-shadow: 0px 20px 40px  rgb(0, 134, 243, 0.5) ;
+  border: 2px solid rgb(0, 204, 255);
+  border-radius: 60px;
+}
+#daily-text {
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(270deg, rgba(0, 255, 157), rgb(0, 140, 255));
+  border-radius: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: 50px;
+  box-shadow: 0px 20px 40px  rgb(0, 134, 243, 0.5) ;
+  border: 2px solid rgb(0, 204, 255);
+  border-radius: 60px;
+}
 /* closing media for mobile */
 }
 
