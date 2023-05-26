@@ -490,26 +490,7 @@ if ("geolocation" in navigator) {
   });
 }
 
-// even functies veranderen terug roepen tijd functie
 
-
-// new code updating timer
-
-// de if statement doet nu niets in deze functie
-// function updateTimer(secondsRemaining) {
-//   // why is secondsRemaining -9240???
-//   // volgends mij zegt secondsRemaining helemaal niets
-//   console.log(secondsRemaining)
-
-//   var timerElement = document.getElementById("wind-direction");
-//   if (secondsRemaining >= 0) {
-//     timerElement.innerHTML = "Wind direction will change in " + secondsRemaining + " seconds.";
-//     secondsRemaining--;
-//     setTimeout(function () { updateTimer(secondsRemaining); }, 1000);
-//   } else {
-//     timerElement.innerHTML = "";
-//   }
-// }
 
 
 
@@ -555,21 +536,77 @@ function windBlowingFrom(windDeg, fromADeg) {
 }
 
 
-// function calculateTimeToChange(windDeg, fromADeg) {
-//   // Calculate the difference between the wind direction and the direction from A to the current location
-//   var diff = windDeg - fromADeg;
 
-//   // Adjust for negative angles
-//   if (diff < -180) {
-//     diff += 360;
-//   } else if (diff > 180) {
-//     diff -= 360;
-//   }
 
-//   // Calculate the time until the wind direction changes towards the user from point A
-//   var timeToChange = diff / 45; // assuming wind changes direction every 45 degrees
 
-//   // Return the time in minutes rounded to the nearest integer
-//   return Math.round(timeToChange * 60);
-// }
+// folding function hour
 
+document.addEventListener("DOMContentLoaded", function () {
+  var toggleButtonHour = document.getElementById("toggleButton-hour");
+  var toggleButtonDay = document.getElementById("toggleButton-day");
+
+  // Set initial state and hide the boxes on page load
+  var isFoldingHiddenHour = true;
+  var isFoldingHiddenDay = true;
+  foldingHide("hourly-box");
+  foldingHide("daily-box");
+
+  toggleButtonHour.addEventListener("click", function () {
+    isFoldingHiddenHour = !isFoldingHiddenHour;
+    toggleFoldingHide(isFoldingHiddenHour, "hourly-box");
+  });
+
+  toggleButtonDay.addEventListener("click", function () {
+    isFoldingHiddenDay = !isFoldingHiddenDay;
+    toggleFoldingHide(isFoldingHiddenDay, "daily-box");
+  });
+
+  function toggleFoldingHide(isHidden, boxId) {
+    var box = document.getElementById(boxId);
+    if (isHidden) {
+      box.classList.add("hide-box");
+    } else {
+      box.classList.remove("hide-box");
+    }
+  }
+
+  function foldingHide(boxId) {
+    var box = document.getElementById(boxId);
+    box.classList.add("hide-box");
+    box.classList.add("test-box");
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// try working code
+
+// Function to change the content of t2
+function modifyText() {
+  const t2 = document.getElementById("t2");
+  const isNodeThree = t2.firstChild.classValue === "three";
+  t2.firstChild.nodeValue = isNodeThree ? "two" : "three";
+}
+
+// Add event listener to table
+const el = document.getElementById("outside");
+el.addEventListener("click", modifyText, false);

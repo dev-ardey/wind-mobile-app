@@ -48,7 +48,8 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 2000px;
+  /* height: 2000px; */
+  height: 140vh;
   position: absolute;
   z-index: 1;
   /* margin vanwege auto div */
@@ -57,11 +58,14 @@ body {
 
 #overlay-green {
   /* background-color: rgb(0, 0, 0); */
+  /* background-color: rgba(248, 98, 71, 0.411); */
   /* background-color: rgb(0, 0, 0, 0.6); */
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 2000px;
+  /* height: 2000px; */
+  /* height: 130%; */
+  height: 140vh;
   position: absolute;
   z-index: 1;
   /* margin vanwege auto div */
@@ -175,7 +179,7 @@ body {
   /* background-color: transparent; */
   border: none;
   cursor: pointer;
-  z-index: 3;
+  z-index: 1;
 }
 
 #overlay-button-img {
@@ -273,7 +277,7 @@ body {
   padding: 1.5rem;
   width: 100%;
   /* background: linear-gradient(180deg, rgb(91, 208, 255),rgb(0, 134, 243) 80%,rgb(0, 93, 243) 100%); */
-  background: linear-gradient(217deg, rgba(0, 242, 255, 0.4), rgba(0, 134, 243,0.5) 70.71%),
+  background: linear-gradient(217deg, rgba(0, 242, 255, 0.664), rgba(0, 134, 243,0.5) 70.71%),
   /* linear-gradient(137deg, rgba(0, 255, 136, 0.8), rgba(0, 134, 243,0.5) 70.71%),      original  */
   linear-gradient(137deg, rgba(0, 225, 255, 0.8), rgba(0, 134, 243,0.5) 70.71%),            
   linear-gradient(366deg, rgba(0,0,255,.8), rgb(0, 134, 243) 90.71%);
@@ -282,6 +286,7 @@ body {
   box-shadow: 0px 30px 30px rgb(0, 134, 243, 0.3) ;
   /* border: 2px solid rgb(0, 134, 243); */
   border: 2px solid rgb(0, 162, 243);
+  animation: pulse-two linear infinite 3s;
 }
 
 .current-location {
@@ -672,6 +677,7 @@ body {
   box-shadow: 0px 20px 40px  rgb(0, 134, 243, 0.5) ;
   border: 2px solid rgb(0, 204, 255);
   border-radius: 60px;
+  cursor: pointer;
 }
 
 #hourly-text {
@@ -684,6 +690,7 @@ body {
   box-shadow: 0px 20px 40px  rgb(0, 134, 243, 0.5) ;
   border: 2px solid rgb(0, 204, 255);
   border-radius: 60px;
+  animation: pulse-two linear infinite 3s 1s;
 }
 #daily-text {
   display: flex;
@@ -696,7 +703,72 @@ body {
   box-shadow: 0px 20px 40px  rgb(0, 134, 243, 0.5) ;
   border: 2px solid rgb(0, 204, 255);
   border-radius: 60px;
+  animation: pulse-two linear infinite 3s 2s;
 }
+
+
+
+.expand-box {
+  /* Define the styles for expanded box */
+  display: block; 
+  /* background-color: greenyellow; */
+  /* Add any additional styles you want for the expanded box */
+}
+
+.hide-box {
+  /* Define the styles for hidden box */
+  display: none;
+  /* background-color: tomato; */
+  /* Add any additional styles you want for the hidden box */
+}
+
+#toggleButton-hour {
+  position: relative;
+  background-color: rgba(190, 68, 46, 0);
+  width: 100%;
+  height: fit-content;
+  /* background-color: transparent; */
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+  #toggleButton-day {
+    position: relative;
+    background-color: rgba(190, 68, 46, 0);
+    width: 100%;
+    height: fit-content;
+    /* background-color: transparent; */
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
+  /* .hide-box {
+    display: none;
+  } */
+
+  .test-box {
+    background: linear-gradient(200deg, rgba(0, 255, 157), rgb(0, 140, 255), rgb(0, 0, 0) 100% );
+    border-radius: 20px;
+    margin-top: -15px;
+  }
+  
+
+  @keyframes pulse-two {
+    0% {
+      border: 2px solid rgb(0, 255, 21);
+    }
+    50% {
+      border: 2px solid rgb(0, 162, 243);
+    }
+    100% {
+      border: 2px solid rgb(0, 255, 21);
+    }
+  }
+
 /* closing media for mobile */
 }
 
@@ -829,6 +901,7 @@ body {
     border-radius: 50%;
     box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.2) ;
     border: 2px solid rgb(0, 255, 247);
+    
   }
   
   .inline-div {
