@@ -16,68 +16,86 @@
   <!-- <img src="images/activated-shield.svg" alt="activated-shield" id="pic-id"> -->
   <div class="air-shield-popup " id="hide-popup-red">
     <div id="overlay-red" class="hidden">
-      <!-- class="hidden?" -->
-      <div id="air-shield-popup-red-id" class="hidden">
-        <ul class="popup-list label">
-          <img src="images/checked-shield.svg" class="air-shield-popup-img">
-          <p class="popup-text-big">Protection Advised</p>
-          <br>
-          <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
-          <br>
-          <li class="popup-text-small">Check AirShield before leaving</li>
-          <br>
-          <li class="popup-text-small">Avoid outdoor activities inside the polluted zone</li>
-          <br>
-          <li class="popup-text-small">Try and go to a non polluted zone when outside</li>
-          <br>
-          <li class="popup-text-small">Stay indoors and close the windows</li>
-          <br>
-          <li class="popup-text-small">Consider using air purifiers indoors</li>
-          <br>
-          <li class="popup-text-small">Wear a mask</li>
-          <br>
-          <br>
-          <p id="text-src"> ~ Advised by harvard </p>
-        </ul>
-      </div>
+    <!-- class="hidden?" -->
+    <div id="air-shield-popup-red-id" class="hidden">
+      <ul class="popup-list label">
+        <img src="images/checked-shield.svg" class="air-shield-popup-img">
+        <p class="popup-text-big">Protection Advised</p>
+        <br>
+        <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
+        <br>
+        <li class="popup-text-small">Check AirShield before leaving</li>
+        <br>
+        <li class="popup-text-small">Avoid outdoor activities inside the polluted zone</li>
+        <br>
+        <li class="popup-text-small">Try and go to a non polluted zone when outside</li>
+        <br>
+        <li class="popup-text-small">Stay indoors and close the windows</li>
+        <br>
+        <li class="popup-text-small">Consider using air purifiers indoors</li>
+        <br>
+        <li class="popup-text-small">Wear a mask</li>
+        <br>
+        <br>
+        <p id="text-src"> ~ Advised by harvard </p>
+      </ul>
     </div>
   </div>
 
+
   <div class="air-shield-popup " id="hide-popup-green">
     <div id="overlay-green" class="hidden">
-      <!-- class="hidden?" -->
-      <div id="air-shield-popup-green-id" class="hidden">
-        <ul class="popup-list label">
-          <img src="images/x-shield.svg" class="air-shield-popup-img">
-          <p class="popup-text-big">No protection needed</p>
-          <br>
-          <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
-          <br>
-          <li class="popup-text-small">Check AirShield before leaving</li>
-          <br>
-          <li class="popup-text-small">isolate seams and cracks in your house</li>
-          <br>
-          <li class="popup-text-small">Try and go to a non polluted zone when outside</li>
-          <br>
-          <li class="popup-text-small">Consider using air purifiers indoors</li>
-          <br>
-          <br>
-          <p class="text-src"> ~ Advised by harvard </p>
-        </ul>
-      </div>
+    <!-- class="hidden?" -->
+    <div id="air-shield-popup-green-id" class="hidden">
+      <ul class="popup-list label">
+        <img src="images/x-shield.svg" class="air-shield-popup-img">
+        <p class="popup-text-big">No protection needed</p>
+        <br>
+        <p class="popup-text-med">How do i SHIELD myself from polluted AIR</p>
+        <br>
+        <li class="popup-text-small">Check AirShield before leaving</li>
+        <br>
+        <li class="popup-text-small">isolate seams and cracks in your house</li>
+        <br>
+        <li class="popup-text-small">Try and go to a non polluted zone when outside</li>
+        <br>
+        <li class="popup-text-small">Consider using air purifiers indoors</li>
+        <br>
+        <br>
+        <p class="text-src"> ~ Advised by harvard </p>
+      </ul>
     </div>
   </div>
+
+  <div id="pollution-data" class="hide-box">
+    <h2>Air Quality Index: <span id="aqi"></span></h2>
+    <h3>Components:</h3>
+    <ul>
+      <li>CO: <span id="co"></span></li>
+      <li>NO: <span id="no"></span></li>
+      <li>NO2: <span id="no2"></span></li>
+      <li>O3: <span id="o3"></span></li>
+      <li>SO2: <span id="so2"></span></li>
+      <li>PM2.5: <span id="pm2_5"></span></li>
+      <li>PM10: <span id="pm10"></span></li>
+    </ul>
+  </div>
+
 
 
   <header class="header">
     <!-- <div id="countdown-timer">wind calc</div> -->
-    <div class="current-location"><span class="label, location-name" id="current-location-id"> CLOSES POLLUTER: <br>TATA
+    <div class="current-location" id="current-id"><span class="label, location-name" id="current-location-id"> CLOSES
+        POLLUTER: <br>TATA
         STEEL</span>
-      <div class="info-group" id="weather-icon-id">Weather</div>
-      <div class="fill-div"></div>
-      <img class="weather-icon large, icon-header, header-icon" id="weather-icon-img" src="icons/sun.png"
-        data-current-icon>
-
+      <div id="particle-div">
+        <div class="info-group" id="weather-icon-id">Particles</div>
+        <!-- <div class="fill-div"></div> -->
+        <div id="pollution-button">
+          <img id="particle-img" src="/images/particle-small.png">
+          <button type="button" id="toggle-pollution"></button>
+        </div>
+      </div>
     </div>
     <div class="map-div">
       <div class="map-with-location">
@@ -89,7 +107,10 @@
       <div class="info-group" id="temp-id">
         <div id="temp-text-id">Temperature</div>
         <div class="label" id="temp-current-id"><span data-current-temp>9</span><span
-            class="value-sub-info">&deg;</span></div>
+            class="value-sub-info">&deg;</span>
+        </div>
+        <img class="weather-icon large, icon-header, header-icon" id="weather-icon-img" src="icons/sun.png"
+          data-current-icon>
       </div>
       <div class="info-group" id="shield-id">
         <!-- AirShield button -->

@@ -579,34 +579,97 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+// new pollution function 
 
+// main.js
 
+document.addEventListener("DOMContentLoaded", function () {
+  let isPollutionDataHidden = true;
+  let pollutionData = null;
 
+  // Function to fetch air pollution data
+  function fetchAirPollutionData() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getPosition, handleLocationError);
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }
 
+  // Function to handle geolocation position
+  function getPosition(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
 
+    const apiKey = "97d43aa82bbe2a80042bef503d4d9a34";
+    const apiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        pollutionData = data;
+        displayAirPollutionData();
+      })
+      .catch(error => console.error("Error fetching air pollution data:", error));
+  }
 
+  // Function to handle geolocation error
+  function handleLocationError(error) {
+    console.error("Error getting geolocation:", error.message);
+  }
 
+  // Function to display air pollution data
+  function displayAirPollutionData() {
+    const aqiElement = document.getElementById("aqi");
+    const components = pollutionData.list[0].components;
 
+    aqiElement.textContent = pollutionData.list[0].main.aqi;
+    document.getElementById("co").textContent = components.co;
+    document.getElementById("no").textContent = components.no;
+    document.getElementById("no2").textContent = components.no2;
+    document.getElementById("o3").textContent = components.o3;
+    document.getElementById("so2").textContent = components.so2;
+    document.getElementById("pm2_5").textContent = components.pm2_5;
+    document.getElementById("pm10").textContent = components.pm10;
+  }
 
+  // Function to show the pollution data
+  function showPollutionData() {
+    const pollutionDataElement = document.getElementById("pollution-data");
+    isPollutionDataHidden = false;
+    pollutionDataElement.classList.remove("hide-box");
+  }
 
+  // Function to hide the pollution data
+  function hidePollutionData() {
+    const pollutionDataElement = document.getElementById("pollution-data");
+    isPollutionDataHidden = true;
+    pollutionDataElement.classList.add("hide-box");
+  }
 
+  // Add event listener to the button
+  const togglePollutionButton = document.getElementById("toggle-pollution");
+  togglePollutionButton.addEventListener("click", function () {
+    if (pollutionData) {
+      displayAirPollutionData();
+    } else {
+      fetchAirPollutionData();
+    }
 
+    if (isPollutionDataHidden) {
+      showPollutionData();
+    } else {
+      hidePollutionData();
+    }
+  });
 
+  // Add event listener to the document to hide the pollution data on tap
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest("#pollution-data") && !event.target.closest("#toggle-pollution")) {
+      hidePollutionData();
+    }
+  });
 
-
-
-
-
-// try working code
-
-// Function to change the content of t2
-function modifyText() {
-  const t2 = document.getElementById("t2");
-  const isNodeThree = t2.firstChild.classValue === "three";
-  t2.firstChild.nodeValue = isNodeThree ? "two" : "three";
-}
-
-// Add event listener to table
-const el = document.getElementById("outside");
-el.addEventListener("click", modifyText, false);
+  // Fetch the air pollution data on page load
+  fetchAirPollutionData();
+});

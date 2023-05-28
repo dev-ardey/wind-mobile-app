@@ -35,12 +35,19 @@ body {
 
 
 /* pop up */
+
+
+
+/* fout zit tussen hier */
 .air-shield-popup {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-content: center;
   text-align: center;
 }
+
+/* fout zit tussen hier */
+
 
 #overlay-red {
   /* background-color: rgb(0, 0, 0); */
@@ -71,6 +78,8 @@ body {
   /* margin vanwege auto div */
   margin-left: -10px;
 }
+
+
 
 #air-shield-popup-red-id {
   /* background: linear-gradient(366deg, rgba(0, 255, 157, 0.5), rgb(0, 140, 255, 0.5) 95.71%); */
@@ -106,6 +115,7 @@ body {
   max-width: 350px;
 }
 
+
 .popup-list {
   display: grid;
   list-style: none;
@@ -130,6 +140,10 @@ body {
   display: grid;
   align-content: center;
 }
+
+
+
+
 
 .text-src {
   font-size: 0.5rem;
@@ -290,17 +304,20 @@ body {
 }
 
 .current-location {
-  display: grid;
-  justify-content: space-evenly;
-  grid-template-columns: repeat(2, 1fr);
+  display:flex;
+  justify-content: space-between;
+  /* grid-template-columns: repeat(2, 1fr); */
   padding-bottom: 5%;
   margin-bottom: -20%;
 }
+
+
 
 #current-location-id {
   display: flex;
   align-self: center;
   max-width: fit-content;
+  margin-bottom: 35px;
 }
 
 .location-name {
@@ -309,6 +326,7 @@ body {
   padding: 5px 15px 5px 15px; 
   border: 2px solid rgb(0, 255, 21);
   text-align: center;
+
 }
 
 .header-icon {
@@ -746,6 +764,37 @@ body {
     padding-bottom: 2rem;
     padding-top: 2rem;
   }
+
+  #pollution-button {
+    display: flex;
+    justify-content: center;
+  }
+
+  #toggle-pollution {
+    position: absolute;
+    background-color: rgb(0, 255, 149,0);
+    border-radius: 20px;
+    width: 100px;
+    height: 110px;
+    /* background-color: transparent; */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-self: center;
+    z-index: 3;
+    margin-top: -25px;
+    /* left: 75%; */
+
+  }
+
+  #particle-img {
+    position:absolute;
+    display: hidden;
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+    animation: particle 10s  infinite;
+  }
   /* .hide-box {
     display: none;
   } */
@@ -756,6 +805,18 @@ body {
     margin-top: -15px;
   }
   
+
+  @keyframes particle {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
   @keyframes pulse-two {
     0% {
