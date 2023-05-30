@@ -110,30 +110,38 @@ function renderCurrentWeather(current) {
   // console.log(current.windDirection)
   //  arrowColor(document.querySelectorAll('.green-arrow-current'), current.windDirection)
   // change map air direction according to what the current degree is
-  if ((current.windDirection >= 337.5 || current.windDirection <= 22.5)) {
-    document.getElementById("temp-map-img").src = map180Url;
-  }
-  else if ((current.windDirection >= 22.6 || current.windDirection <= 67.5)) {
-    document.getElementById("temp-map-img").src = map225Url;
-  }
-  else if ((current.windDirection >= 67.6 || current.windDirection <= 112.5)) {
-    document.getElementById("temp-map-img").src = map270Url;
-  }
-  else if ((current.windDirection >= 112.6 || current.windDirection <= 157, 6.5)) {
-    document.getElementById("temp-map-img").src = map315Url;
-  }
-  else if ((current.windDirection >= 157.6 || current.windDirection <= 202.5)) {
-    document.getElementById("temp-map-img").src = map0Url;
-  }
-  else if ((current.windDirection >= 202.6 || current.windDirection <= 247.5)) {
-    document.getElementById("temp-map-img").src = map45Url;
-  }
-  else if ((current.windDirection >= 247.6 || current.windDirection <= 292.5)) {
-    document.getElementById("temp-map-img").src = map90Url;
-  }
-  else if ((current.windDirection >= 292.6 || current.windDirection <= 337.5)) {
-    document.getElementById("temp-map-img").src = map135Url;
-  }
+
+  // old working function that displays 8 different degrees, new function displays 360 versions
+  // if ((current.windDirection >= 337.5 || current.windDirection <= 22.5)) {
+  //   document.getElementById("temp-map-img").src = map180Url;
+  // }
+  // else if ((current.windDirection >= 22.6 || current.windDirection <= 67.5)) {
+  //   document.getElementById("temp-map-img").src = map225Url;
+  // }
+  // else if ((current.windDirection >= 67.6 || current.windDirection <= 112.5)) {
+  //   document.getElementById("temp-map-img").src = map270Url;
+  // }
+  // else if ((current.windDirection >= 112.6 || current.windDirection <= 157, 6.5)) {
+  //   document.getElementById("temp-map-img").src = map315Url;
+  // }
+  // else if ((current.windDirection >= 157.6 || current.windDirection <= 202.5)) {
+  //   document.getElementById("temp-map-img").src = map0Url;
+  // }
+  // else if ((current.windDirection >= 202.6 || current.windDirection <= 247.5)) {
+  //   document.getElementById("temp-map-img").src = map45Url;
+  // }
+  // else if ((current.windDirection >= 247.6 || current.windDirection <= 292.5)) {
+  //   document.getElementById("temp-map-img").src = map90Url;
+  // }
+  // else if ((current.windDirection >= 292.6 || current.windDirection <= 337.5)) {
+  //   document.getElementById("temp-map-img").src = map135Url;
+  // }
+
+  // new function displays 360 directions
+  arrowRotate(document.querySelectorAll('.pollution-angle-class'), current.windDirection)
+
+
+
 }
 
 function arrowRotate(elems, windDirection) {
@@ -474,9 +482,21 @@ if ("geolocation" in navigator) {
           document.getElementById("value-shield").innerHTML = "activated ⓘ";
           document.getElementById("green-cloud-id").src = redCloudUrl;
           document.getElementById("green-cloud-id").classList.toggle("stopping-cloud");
+          // background: linear-gradient(90deg, rgb(255, 60, 60), rgb(0, 119, 255))
+          document.getElementById("current-text").style.border = "2px solid rgb(255, 112, 119)";
+          // document.getElementById("temp-map-img").style.border = "2px solid rgb(255, 112, 119)";
+          document.getElementById("current-text").style.background = "linear-gradient(90deg, rgb(255, 60, 60), rgb(0, 119, 255)";
+          document.getElementById("air-shield-popup-red-id").style.background = "linear-gradient(180deg, rgb(255, 60, 60), rgb(0, 119, 255)";
+          document.getElementById("pollution-data").style.background = "linear-gradient(180deg, rgb(255, 60, 60), rgb(0, 119, 255)";
+
+          // document.getElementById("green-cloud-id").classList.toggle("stopping-cloud");
+          // mischien background blurred maken, door class te geven bij het clicken van button?
+
+
 
           document.getElementById("overlay-button").addEventListener("click", function () {
             document.getElementById("overlay-red").classList.toggle("darken");
+            // document.getElementById("header").classList.toggle("blur");
             document.getElementById("air-shield-popup-red-id").classList.toggle("show");
             document.getElementById("hide-popup-red").classList.toggle("show");
             // document.getElementById("overlay-button").style.background = "rgba(46, 84, 190, 0)";
@@ -602,7 +622,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const lon = position.coords.longitude;
 
     const apiKey = "97d43aa82bbe2a80042bef503d4d9a34";
-    const apiUrl = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
     fetch(apiUrl)
       .then(response => response.json())
